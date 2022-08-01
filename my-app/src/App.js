@@ -1,27 +1,39 @@
-import logo from './logo.svg';
-import {useState} from 'react';
+import React, { useState, useEffect } from 'react'
+import NavBar from './components/NavBar';
 import './App.css';
+import Homepage from './components/Homepage';
+
 
 function App() {
+
   const [articles, setArticles] = useState([])
 
-  // const fetchArticles = () => {
-  //   fetch('/articles')
-  //     .then(res => {
-  //       if (res.ok) {
-  //         res.json().then(setArticles)
-  //       } else {
-  //         res.json().then(data => setErrors(data.error))
-  //       }
-  //     })
-  // }
+  useEffect(() => {
+    fetch("http://api.mediastack.com/v1/news?access_key=54f9e8289ca44e551dc591b1c52f079f&categories=entertainment")
+    .then(res => res.json())
+    .then(articles => setArticles(articles))},
+    [])
+    // console.log(articles.data)
+
+    const articleData = articles.data
+    console.log(articleData)
+
+    // const articlesList = articleData.map((article) => (
+    //   <Homepage
+    //  key = {article.id} 
+    //  title = {article.title} 
+    //  author = {article.author}
+    //  description= {article.description}
+    //  image= {article.image} />))
+
+    //  console.log(articlesList)
+
   return (
-    <div >
-      <NavBar/>
-      <Login/>
-      <ArticleList/>
-      
-     
+    <div>
+    <NavBar />
+      <div>
+        {/* {articlesList} */}
+      </div>
     </div>
   );
 }
