@@ -52,8 +52,8 @@ function App() {
   return (
     <Router>
     <div >
-      {articlesList}
-        <nav>
+      {/* {articlesList} */}
+        <nav className="nav">
           <ul>
             <li>
               <Link to="/">Home</Link>
@@ -72,23 +72,6 @@ function App() {
             </li>
           </ul>
         </nav>
-      <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route exact path="/:user">
-            <MyProfile />
-          </Route>
-          <Route exact path="/signup">
-            <Signup />
-          </Route>
-          <Route exact path="/login">
-            <Login />
-          </Route>
-          <Route exact path="/articles">
-            <Articles/>
-          </Route>
-      </Switch>
       </div>
     </Router>
 
