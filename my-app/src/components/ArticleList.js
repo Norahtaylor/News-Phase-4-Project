@@ -1,8 +1,10 @@
 import React from 'react'
 
-function ArticleList() {
+
+function ArticleList({ description, title, author }) {
   return (
     <div>
+          {title}
     </div>
   )
 }
