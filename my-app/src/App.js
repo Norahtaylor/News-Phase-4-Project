@@ -23,7 +23,7 @@ function App() {
       .then((res) => res.json())
       .then((articles) => setArticles(articles));
   }, []);
-  
+
   console.log(articles)
 
   const articlesList = articles.map((article) => (
@@ -39,6 +39,7 @@ function App() {
   return (
     <div >
       <h1>Test</h1>
+      {articlesList}
       <li></li>
       <NavBar/>
       <Login/>
