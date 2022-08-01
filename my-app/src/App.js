@@ -46,35 +46,18 @@ function App() {
     //  description= {article.description}
     //  image= {article.image} />))
 
-    //  console.log(articlesList)
+
 
 
   return (
+    <div>
+      <h1>test</h1>
     <Router>
     <div >
-      {articlesList}
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/signup">Signup</Link>
-            </li>
-            <li>
-              <Link to="/:user">My Profile</Link>
-            </li>
-            <li>
-              <Link to="/articles">News Articles</Link>
-            </li>
-          </ul>
-        </nav>
-      <Switch>
+        <NavBar />
+      {/* <Switch>
           <Route exact path="/">
-            <Home />
+            <Homepage />
           </Route>
           <Route exact path="/:user">
             <MyProfile />
@@ -86,32 +69,25 @@ function App() {
             <Login />
           </Route>
           <Route exact path="/articles">
-            <Articles/>
+            <ArticleList/>
           </Route>
-      </Switch>
+      </Switch> */}
       </div>
     </Router>
 
-    //   <NavBar/>
-    //     <Link className="nav-link" to={'/sign-in'}>
-    //       <Login />
-    //     </Link>
+    <Homepage />
+
+      <NavBar/>
+        <Link className="nav-link" to={'/sign-in'}>
+        <Login />
+      </Link>
     
-    //   <ArticleList />
-    //   <Signup />
+    <ArticleList />
+     <Signup />
       
      
-    // </div>
-    // </Router>
+     </div>
 
-  
-  //return (
-    //<div>
-   // <NavBar />
-   //   <div>
-    //    {/* {articlesList} */}
-   //   </div>
-   // </div>
 
   );
 }
