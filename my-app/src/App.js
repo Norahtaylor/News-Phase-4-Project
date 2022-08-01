@@ -1,8 +1,10 @@
 import {useState, useEffect} from 'react';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import NavBar from './components/NavBar'
 import Login from './components/Login'
 import ArticleList from './components/ArticleList'
+import Signup from './components/Signup'
 
 function App() {
   const [articles, setArticles] = useState([])
@@ -39,11 +41,12 @@ function App() {
   return (
     <div >
       <h1>Test</h1>
-      {articlesList}
+      {/* {articlesList} */}
       <li></li>
       <NavBar/>
       <Login/>
       <ArticleList />
+      <Signup />
       
      
     </div>
