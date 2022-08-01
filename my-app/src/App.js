@@ -1,10 +1,12 @@
 import {useState, useEffect} from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import NavBar from './components/NavBar'
 import Login from './components/Login'
 import ArticleList from './components/ArticleList'
 import Signup from './components/Signup'
+import MyProfile from './components/MyProfile';
 
 function App() {
   const [articles, setArticles] = useState([])
@@ -35,21 +37,61 @@ function App() {
     author = {article.author}
     description= {article.description} />))
 
-    console.log(articlesList)
-
 
   return (
+    <Router>
     <div >
-      <h1>Test</h1>
-      {/* {articlesList} */}
-      <li></li>
-      <NavBar/>
-      <Login/>
-      <ArticleList />
-      <Signup />
+      {articlesList}
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+            <li>
+              <Link to="/signup">Signup</Link>
+            </li>
+            <li>
+              <Link to="/:user">My Profile</Link>
+            </li>
+            <li>
+              <Link to="/articles">News Articles</Link>
+            </li>
+          </ul>
+        </nav>
+      <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route exact path="/:user">
+            <MyProfile />
+          </Route>
+          <Route exact path="/signup">
+            <Signup />
+          </Route>
+          <Route exact path="/login">
+            <Login />
+          </Route>
+          <Route exact path="/articles">
+            <Articles/>
+          </Route>
+      </Switch>
+      </div>
+    </Router>
+
+    //   <NavBar/>
+    //     <Link className="nav-link" to={'/sign-in'}>
+    //       <Login />
+    //     </Link>
+    
+    //   <ArticleList />
+    //   <Signup />
       
      
-    </div>
+    // </div>
+    // </Router>
   );
 }
 
