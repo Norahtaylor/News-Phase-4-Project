@@ -2,6 +2,7 @@ import React from 'react'
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
+
 function Homepage({ articleList, image, title, description, author, date }) {
   return(
     <Card className="card" style={{ width: '18rem' }}>
@@ -15,6 +16,7 @@ function Homepage({ articleList, image, title, description, author, date }) {
       <Button variant="primary">Add to Favorites</Button>
     </Card.Body>
   </Card>
+
   )
 }
 

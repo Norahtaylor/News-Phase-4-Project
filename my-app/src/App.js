@@ -15,9 +15,9 @@ import Homepage from './components/Homepage';
 function App() {
   const [errors, setErrors] = useState()
   const [articles, setArticles] = useState([])
-
- 
+  const [currentUser, setCurrentUser] = useState({})
   
+
   useEffect(() => {
     fetch(`http://api.mediastack.com/v1/news?access_key=${process.env.REACT_APP_API_KEY}&categories=entertainment`)
     .then(res => {
@@ -39,16 +39,34 @@ function App() {
      date = {article.published_at} />))
 
 
+  useEffect(() => {
+    // auto-login
+    fetch("http://localhost:4000/me").then((r) => {
+      if (r.ok) {
+        r.json().then((currentUser) => setCurrentUser(currentUser));
+      }
+    });
+  }, []);
+  // if (currentUser) {
+  //   return <h2>Welcome, {currentUser.username}</h2>
+  // } 
+
+     const updateUser = (user) => setCurrentUser(user)
+  // console.log(currentUser)
   return (
 
    <div>
-    <NavBar />
+
+    {/* <NavBar currentUser={currentUser} setCurrentUser={setCurrentUser}/> */}
+    <NavBar setCurrentUser={setCurrentUser} currentUser={currentUser}/>
+   
+    
       <Routes>
-        <Route path="/" element={<Homepage articleList={articlesList} />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/:user" element={<MyProfile />} />
-        <Route path="/articles" element={<ArticleList />} />
+        <Route exact path="/" element={<Homepage />} />
+        <Route exact path="/login" element={<Login updateUser={updateUser} />} />
+        <Route exact path="/signup" element={<Signup updateUser={updateUser} />} /> 
+        <Route exact path="/profile" element={<MyProfile updateUser={updateUser} />} />
+        <Route exact path="/articles" element={<ArticleList />} />
       </Routes>
 
    </div>
