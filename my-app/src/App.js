@@ -22,32 +22,29 @@ function App() {
     fetch(`http://api.mediastack.com/v1/news?access_key=${process.env.REACT_APP_API_KEY}&categories=entertainment`)
     .then(res => {
       if (res.ok) {
-          res.json().then(setArticles)
+          res.json().then(articles => setArticles(articles.data))
       } else {
           res.json().then(data => setErrors(data.errors))
       } 
     })
-  }, [])
-
-  console.log(articles.data)
-
-    // const articleData = articles.data
-    // const articlesList = articleData.map((article) => (
-    //   <Homepage
-    //  key = {article.id} 
-    //  title = {article.title} 
-    //  author = {article.author}
-    //  description= {article.description}
-    //  image= {article.image} />))
+  }, []) 
+  
+    const articlesList = articles.map((article) => (
+      <Homepage
+     key = {article.id} 
+     title = {article.title} 
+     author = {article.author}
+     description= {article.description}
+     image = {article.image}
+     date = {article.published_at} />))
 
 
   return (
 
    <div>
     <NavBar />
-    {/* {articlesList} */}
       <Routes>
-        <Route path="/" element={<Homepage />} />
+        <Route path="/" element={<Homepage articleList={articlesList} />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/:user" element={<MyProfile />} />
