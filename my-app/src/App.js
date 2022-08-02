@@ -1,6 +1,6 @@
 
 import {useState, useEffect} from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { Router, Routes, Route } from 'react-router-dom'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import NavBar from './components/NavBar'
@@ -13,30 +13,25 @@ import Homepage from './components/Homepage';
 
 
 function App() {
-
+  const [errors, setErrors] = useState()
   const [articles, setArticles] = useState([])
 
-
-  // const fetchArticles = () => {
-  //   fetch('/articles')
-  //     .then(res => {
-  //       if (res.ok) {
-  //         res.json().then(setArticles)
-  //       } else {
-  //         res.json().then(data => setErrors(data.error))
-  //       }
-  //     })
-  // }
+ 
   
   useEffect(() => {
-    fetch("http://api.mediastack.com/v1/news?access_key=54f9e8289ca44e551dc591b1c52f079f&categories=entertainment")
-    .then(res => res.json())
-    .then(articles => setArticles(articles))},
-    [])
-    // console.log(articles.data)
+    fetch(`http://api.mediastack.com/v1/news?access_key=${process.env.REACT_APP_API_KEY}&categories=entertainment`)
+    .then(res => {
+      if (res.ok) {
+          res.json().then(setArticles)
+      } else {
+          res.json().then(data => setErrors(data.errors))
+      } 
+    })
+  }, [])
+    console.log(articles.data)
 
     const articleData = articles.data
-    console.log(articleData)
+
 
     // const articlesList = articleData.map((article) => (
     //   <Homepage
@@ -46,55 +41,22 @@ function App() {
     //  description= {article.description}
     //  image= {article.image} />))
 
-    //  console.log(articlesList)
-
 
   return (
-    <Router>
-    <div >
+
+   <div>
+    <NavBar />
       {/* {articlesList} */}
-        <nav className="nav">
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/signup">Signup</Link>
-            </li>
-            <li>
-              <Link to="/:user">My Profile</Link>
-            </li>
-            <li>
-              <Link to="/articles">News Articles</Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </Router>
-
-    //   <NavBar/>
-    //     <Link className="nav-link" to={'/sign-in'}>
-    //       <Login />
-    //     </Link>
     
-    //   <ArticleList />
-    //   <Signup />
-      
-     
-    // </div>
-    // </Router>
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/:user" element={<MyProfile />} />
+        <Route path="/articles" element={<ArticleList />} />
+      </Routes>
 
-  
-  //return (
-    //<div>
-   // <NavBar />
-   //   <div>
-    //    {/* {articlesList} */}
-   //   </div>
-   // </div>
+   </div>
 
   );
 }
