@@ -29,12 +29,9 @@ function App() {
     })
   }, [])
 
-  
-    // console.log(articles.data)
+  console.log(articles.data)
 
     // const articleData = articles.data
-
-
     // const articlesList = articleData.map((article) => (
     //   <Homepage
     //  key = {article.id} 
@@ -48,8 +45,7 @@ function App() {
 
    <div>
     <NavBar />
-      {/* {articlesList} */}
-    
+    {/* {articlesList} */}
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/login" element={<Login />} />
