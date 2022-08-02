@@ -1,9 +1,41 @@
-import React from 'react'
+import React, {useState} from 'react'
+import { useNavigate } from 'react-router-dom'
 
-function Login() {
+function Login({updateUser}) {
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+    const [errors, setErrors] = useState([])
+    let navigate = useNavigate()
+
+    function handelSubmit(e){
+        e.preventDefault()
+
+        fetch('/login', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({username, password})
+        })
+        .then(r => {
+            if(r.ok) {
+                r.json().then(user => updateUser(user))
+                navigate('/profile')
+            } 
+            // else {
+            //     r.json().then((err) => setErrors(err.errors))
+            // }
+        })
+        setUsername('')
+        setPassword('')
+    }
+
+
+
   return (
+    <div>
 
-      <form>
+      <form onSubmit={handelSubmit}>
           <h3>Sign In</h3>
           <div className="mb-3">
               <label>Username</label>
@@ -11,6 +43,8 @@ function Login() {
                   type="username"
                   className="form-control"
                   placeholder="Enter username"
+                  value={username}
+                  onChange={(e => setUsername(e.target.value))}
               />
           </div>
           <div className="mb-3">
@@ -19,6 +53,8 @@ function Login() {
                   type="password"
                   className="form-control"
                   placeholder="Enter password"
+                  value={password}
+                  onChange={(e => setPassword(e.target.value))}
               />
           </div>
           <div className="mb-3">
@@ -38,11 +74,19 @@ function Login() {
                   Submit
               </button>
           </div>
-          <p className="forgot-password text-right">
+          {/* <p className="forgot-password text-right">
               Forgot <a href="#">password?</a>
-          </p>
+          </p> */}
+          
+            {/* {errors.length > 0 && (
+                <ul style={{ color: "red" }}>
+                      {errors.map((error) => (
+                          <li key={error}>{error}</li>
+                      ))}
+                 </ul>)}  */}
+
       </form>
-    
+    </div>
   )
 }
 
