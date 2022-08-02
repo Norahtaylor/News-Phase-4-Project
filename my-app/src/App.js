@@ -17,26 +17,27 @@ function App() {
   const [articles, setArticles] = useState([])
   const [currentUser, setCurrentUser] = useState({})
   
-  // useEffect(() => {
-  //   fetch(`http://api.mediastack.com/v1/news?access_key=${process.env.REACT_APP_API_KEY}&categories=entertainment`)
-  //   .then(res => {
-  //     if (res.ok) {
-  //       res.json().then(articles => setArticles(articles.data))
-  //     } else {
-  //         res.json().then(data => setErrors(data.errors))
-  //     } 
-  //   })
-  // }, [])
 
-    // const articleData = articles
+  useEffect(() => {
+    fetch(`http://api.mediastack.com/v1/news?access_key=${process.env.REACT_APP_API_KEY}&categories=entertainment`)
+    .then(res => {
+      if (res.ok) {
+          res.json().then(articles => setArticles(articles.data))
+      } else {
+          res.json().then(data => setErrors(data.errors))
+      } 
+    })
+  }, []) 
+  
+    const articlesList = articles.map((article) => (
+      <Homepage
+     key = {article.id} 
+     title = {article.title} 
+     author = {article.author}
+     description= {article.description}
+     image = {article.image}
+     date = {article.published_at} />))
 
-    // const articlesList = articleData.map((article) => (
-    //   <Homepage
-    //  key = {article.id} 
-    //  title = {article.title} 
-    //  author = {article.author}
-    //  description= {article.description}
-    //  image= {article.image} />))
 
   useEffect(() => {
     // auto-login
@@ -55,7 +56,7 @@ function App() {
   return (
 
    <div>
-    Hello from Home
+
     {/* <NavBar currentUser={currentUser} setCurrentUser={setCurrentUser}/> */}
     <NavBar setCurrentUser={setCurrentUser} currentUser={currentUser}/>
    

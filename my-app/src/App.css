@@ -50,9 +50,13 @@ body {
   background-color: #777;
 }
 
-.card-image {
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 5px;
-  width: 150px; 
+.news-img{
+  text-align: center;
+  display: block;
+}
+
+.news-img img{
+  
+  width: 150px;
+  height: 150px;
 }

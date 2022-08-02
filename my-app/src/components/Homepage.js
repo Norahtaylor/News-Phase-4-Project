@@ -1,16 +1,22 @@
 import React from 'react'
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 
-function Homepage({ image, title, description, author, articleList }) {
 
-  return (
-
-    <div className="card">
+function Homepage({ articleList, image, title, description, author, date }) {
+  return(
+    <Card className="card" style={{ width: '18rem' }}>
       {articleList}
-        <img className="card-img" src={image} alt="articles-pic"/>
-        <h2>{title}</h2>
-        <p>{description}</p>
-        <h4>{author}</h4>
-    </div>
+    <Card className="news-img">
+      <Card.Img variant="top" src={image} />
+    </Card>
+    <Card.Body className="container">
+      <Card.Title>{title}</Card.Title>
+      <Card.Text>{description}</Card.Text>
+      <Button variant="primary">Add to Favorites</Button>
+    </Card.Body>
+  </Card>
+
   )
 }
 
