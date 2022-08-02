@@ -11,8 +11,9 @@
         "react": "^18.2.0",
         "react-bootstrap-form": "^0.1.4-beta6",
         "react-dom": "^18.2.0",
-        "react-router-dom": "^6.3.0",
+        "react-router-dom": "^5.3.3",
         "react-scripts": "5.0.1",
+        "use-history": "^1.4.1",
         "web-vitals": "^2.1.4"
     },
     "scripts": {
