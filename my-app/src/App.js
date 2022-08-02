@@ -19,17 +19,17 @@ function App() {
   
 
   useEffect(() => {
-    fetch(`http://api.mediastack.com/v1/news?access_key=${process.env.REACT_APP_API_KEY}&categories=entertainment`)
+    fetch('http://localhost:4000/articles')
     .then(res => {
       if (res.ok) {
-          res.json().then(articles => setArticles(articles.data))
+          res.json().then(articles => setArticles(articles))
       } else {
           res.json().then(data => setErrors(data.errors))
       } 
     })
   }, []) 
   
-    const articlesList = articles.map((article) => (
+    const articleList = articles.map((article) => (
       <Homepage
      key = {article.id} 
      title = {article.title} 
@@ -52,7 +52,7 @@ function App() {
   // } 
 
      const updateUser = (user) => setCurrentUser(user)
-  // console.log(currentUser)
+
   return (
 
    <div>
@@ -62,7 +62,7 @@ function App() {
    
     
       <Routes>
-        <Route exact path="/" element={<Homepage />} />
+        <Route exact path="/" element={<Homepage articleList={articleList} />} />
         <Route exact path="/login" element={<Login updateUser={updateUser} />} />
         <Route exact path="/signup" element={<Signup updateUser={updateUser} />} /> 
         <Route exact path="/profile" element={<MyProfile updateUser={updateUser} />} />
