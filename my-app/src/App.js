@@ -1,52 +1,63 @@
+
 import {useState, useEffect} from 'react';
+import { Router, Routes, Route } from 'react-router-dom'
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import NavBar from './components/NavBar'
 import Login from './components/Login'
 import ArticleList from './components/ArticleList'
+import Signup from './components/Signup'
+import MyProfile from './components/MyProfile';
+import Homepage from './components/Homepage';
+
+
 
 function App() {
+  const [errors, setErrors] = useState()
   const [articles, setArticles] = useState([])
 
-  // const fetchArticles = () => {
-  //   fetch('/articles')
-  //     .then(res => {
-  //       if (res.ok) {
-  //         res.json().then(setArticles)
-  //       } else {
-  //         res.json().then(data => setErrors(data.error))
-  //       }
-  //     })
-  // }
-
+ 
+  
   useEffect(() => {
-    fetch("/articles")
-      .then((res) => res.json())
-      .then((articles) => setArticles(articles));
-  }, []);
+    fetch(`http://api.mediastack.com/v1/news?access_key=${process.env.REACT_APP_API_KEY}&categories=entertainment`)
+    .then(res => {
+      if (res.ok) {
+          res.json().then(setArticles)
+      } else {
+          res.json().then(data => setErrors(data.errors))
+      } 
+    })
+  }, [])
+    console.log(articles.data)
 
-  console.log(articles)
+    const articleData = articles.data
 
-  const articlesList = articles.map((article) => (
-     <ArticleList
-    key = {article.id} 
-    title = {article.title} 
-    author = {article.author}
-    description= {article.description} />))
 
-    console.log(articlesList)
+    // const articlesList = articleData.map((article) => (
+    //   <Homepage
+    //  key = {article.id} 
+    //  title = {article.title} 
+    //  author = {article.author}
+    //  description= {article.description}
+    //  image= {article.image} />))
 
 
   return (
-    <div >
-      <h1>Test</h1>
-      {articlesList}
-      <li></li>
-      <NavBar/>
-      <Login/>
-      <ArticleList />
-      
-     
-    </div>
+
+   <div>
+    <NavBar />
+      {/* {articlesList} */}
+    
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/:user" element={<MyProfile />} />
+        <Route path="/articles" element={<ArticleList />} />
+      </Routes>
+
+   </div>
+
   );
 }
 
