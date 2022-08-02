@@ -1,6 +1,6 @@
 
 import {useState, useEffect} from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { Router, Routes, Route } from 'react-router-dom'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import NavBar from './components/NavBar'
@@ -13,67 +13,52 @@ import Homepage from './components/Homepage';
 
 
 function App() {
-
+  const [errors, setErrors] = useState()
   const [articles, setArticles] = useState([])
 
-
-  // const fetchArticles = () => {
-  //   fetch('/articles')
-  //     .then(res => {
-  //       if (res.ok) {
-  //         res.json().then(setArticles)
-  //       } else {
-  //         res.json().then(data => setErrors(data.error))
-  //       }
-  //     })
-  // }
+ 
   
   useEffect(() => {
-    fetch("http://api.mediastack.com/v1/news?access_key=54f9e8289ca44e551dc591b1c52f079f&categories=entertainment")
-    .then(res => res.json())
-    .then(articles => setArticles(articles))},
-    [])
+    fetch(`http://api.mediastack.com/v1/news?access_key=${process.env.REACT_APP_API_KEY}&categories=entertainment`)
+    .then(res => {
+      if (res.ok) {
+          res.json().then(setArticles)
+      } else {
+          res.json().then(data => setErrors(data.errors))
+      } 
+    })
+  }, [])
+
+  
     // console.log(articles.data)
 
-    const articleData = articles.data
-    console.log(articleData)
+    // const articleData = articles.data
 
-    const articlesList = articleData.map((article) => (
-      <Homepage
-     key = {article.id} 
-     title = {article.title} 
-     author = {article.author}
-     description= {article.description}
-     image= {article.image} />))
 
-     console.log(articlesList)
+    // const articlesList = articleData.map((article) => (
+    //   <Homepage
+    //  key = {article.id} 
+    //  title = {article.title} 
+    //  author = {article.author}
+    //  description= {article.description}
+    //  image= {article.image} />))
 
 
   return (
-    <div>
+
+   <div>
     <NavBar />
-      <div>
-        {articlesList}
-      </div>
-    </div>
-
-
-      // {/* <Routes>
-      //   <Route path='/' element={<Homepage />} />
-      //   <Route path='/signup' element={<Signup />} />
-      // </Routes> */}
-
-    //   <NavBar/>
-    //     <Link className="nav-link" to={'/sign-in'}>
-    //       <Login />
-    //     </Link>
+      {/* {articlesList} */}
     
-    //   <ArticleList />
-    //   <Signup />
-      
-     
-    // </div>
-    // </Router>
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/:user" element={<MyProfile />} />
+        <Route path="/articles" element={<ArticleList />} />
+      </Routes>
+
+   </div>
 
   );
 }

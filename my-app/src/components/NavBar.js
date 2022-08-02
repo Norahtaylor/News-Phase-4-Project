@@ -1,25 +1,35 @@
 import React from 'react'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+
+
 
 function NavBar() {
   return (
+  
+      <div >
+        <nav className="nav">
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+              
+            </li>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+            <li>
+              <Link to="/signup">Signup</Link>
+            </li>
+            <li>
+              <Link to="/:user">My Profile</Link>
+            </li>
+            <li>
+              <Link to="/articles">News Articles</Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
 
-    <div>
-    <nav className="nav">
-        <a className="title" href="/">Norahs News</a>
-        <ul>
-            <li>
-                <a href="/ArticleList">Article List</a>
-            </li>
-            <li>
-                <a href="/Login">Login</a>
-            </li>
-            <li>
-                <a href="/Signup">Signup</a>
-            </li>
-        </ul>
-    </nav>
-    </div> 
-
+   
   )
 }
 
