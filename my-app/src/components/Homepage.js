@@ -2,11 +2,13 @@ import React from 'react'
 
 function Homepage({ image, title, description, author }) {
   return (
-    <div className="card">
-        <img className="card-img" src={image} alt="articles-pic"/>
-        <h2>{title}</h2>
-        <p>{description}</p>
-        <h4>{author}</h4>
+    <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src={image} alt="Card image cap"/>
+      <div class="card-body">
+        <h5 class="card-title">{title}</h5>
+        <p class="card-text">{description}</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
     </div>
   )
 }

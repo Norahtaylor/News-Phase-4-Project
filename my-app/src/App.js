@@ -38,42 +38,30 @@ function App() {
     const articleData = articles.data
     console.log(articleData)
 
-    // const articlesList = articleData.map((article) => (
-    //   <Homepage
-    //  key = {article.id} 
-    //  title = {article.title} 
-    //  author = {article.author}
-    //  description= {article.description}
-    //  image= {article.image} />))
+    const articlesList = articleData.map((article) => (
+      <Homepage
+     key = {article.id} 
+     title = {article.title} 
+     author = {article.author}
+     description= {article.description}
+     image= {article.image} />))
 
-    //  console.log(articlesList)
+     console.log(articlesList)
 
 
   return (
-    <Router>
-    <div >
-      {/* {articlesList} */}
-        <nav className="nav">
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/signup">Signup</Link>
-            </li>
-            <li>
-              <Link to="/:user">My Profile</Link>
-            </li>
-            <li>
-              <Link to="/articles">News Articles</Link>
-            </li>
-          </ul>
-        </nav>
+    <div>
+    <NavBar />
+      <div>
+        {articlesList}
       </div>
-    </Router>
+    </div>
+
+
+      // {/* <Routes>
+      //   <Route path='/' element={<Homepage />} />
+      //   <Route path='/signup' element={<Signup />} />
+      // </Routes> */}
 
     //   <NavBar/>
     //     <Link className="nav-link" to={'/sign-in'}>
@@ -86,15 +74,6 @@ function App() {
      
     // </div>
     // </Router>
-
-  
-  //return (
-    //<div>
-   // <NavBar />
-   //   <div>
-    //    {/* {articlesList} */}
-   //   </div>
-   // </div>
 
   );
 }

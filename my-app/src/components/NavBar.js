@@ -1,23 +1,26 @@
-// import React from 'react'
+import React from 'react'
 
-// function NavBar() {
-//   return (
+function NavBar() {
+  return (
 
-//     <div>NavBar
-//     <nav className="nav">
-//         <a href="/" className="title">Norahs News</a>
-//         <ul>
-//             <li>
-//                 <a href="/ArticleList">Favorites</a>
-//             </li>
-//             <li>
-//                 <a href="/Login">Login</a>
-//             </li>
-//         </ul>
-//     </nav>
-//     </div> 
+    <div>
+    <nav className="nav">
+        <a className="title" href="/">Norahs News</a>
+        <ul>
+            <li>
+                <a href="/ArticleList">Article List</a>
+            </li>
+            <li>
+                <a href="/Login">Login</a>
+            </li>
+            <li>
+                <a href="/Signup">Signup</a>
+            </li>
+        </ul>
+    </nav>
+    </div> 
 
-//   )
-// }
+  )
+}
 
-// export default NavBar
+export default NavBar
