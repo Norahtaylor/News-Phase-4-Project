@@ -1,8 +1,48 @@
-import React from 'react'
+import {useEffect, useState} from 'react';
+import Card from '../Card';
 
 function ReadingList() {
+  const[reading, setReading] = useState([])
+ 
+  useEffect(() => {
+    fetch('/readinglist')
+      .then(res => {
+        if (res.ok) {
+          res.json().then(reading => setReading(reading))
+        } 
+      })
+  }, []) 
+  console.log(reading)
+
+  const readingList = reading.map((article) => (
+      <Card
+     id = {article.id} 
+     titleRead = {article.title} 
+     linkRead = {article.url}
+     summaryRead = {article.description}
+     imageRead = {article.image}
+     categoryRead = {article.category}
+     favRead = {article.favorite} />
+   ))
+
+
+
+ 
   return (
-    <div>reading list </div>
+    <div>
+      {reading.map((article) => (
+      <Card
+        idRead={article.id}
+        titleRead={article.title}
+        linkRead={article.url}
+        summaryRead={article.description}
+        imageRead={article.image}
+        categoryRead={article.category}
+        favRead={article.favorite} />
+      ))}
+      <h1 className="reading">My Reading List</h1>
+     
+    </div>
   )
 }
 

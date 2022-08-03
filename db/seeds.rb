@@ -19,10 +19,10 @@ puts "🌱 Seeding spices..."
 
 # Article.create!(title: "SpaceX working to improve fairing recovery for continued success", url: "https://categoryeflight.com/2022/08/spacex-fairing-recovery/", image: "https://www.nasaspaceflight.com/wp-content/uploads/2022/07/NSFArticleLead-1170x655.png", description: "After a year of solid success with Falon 9 ing recovery and reuse, SpaceX has once again started tinkering with the recovery operation.", favorite: false, category: "NASA Spaceflight")
 
-Article.create!(title: "Russia wants a better look at what America's newest spy satellite can do", url:"https://arstechnica.com/science/2022/08/russia-apparently-just-launched-a-satellite-to-snoop-on-a-new-us-satellite/",
-image: "https://cdn.arstechnica.net/wp-content/uploads/2022/08/220203-D-RQ659-1001.jpg",
-category: "Arstechnica",
-description: "Spying in space does not violate any international norms.", favorite: false)
+# Article.create!(title: "Russia wants a better look at what America's newest spy satellite can do", url:"https://arstechnica.com/science/2022/08/russia-apparently-just-launched-a-satellite-to-snoop-on-a-new-us-satellite/",
+# image: "https://cdn.arstechnica.net/wp-content/uploads/2022/08/220203-D-RQ659-1001.jpg",
+# category: "Arstechnica",
+# description: "Spying in space does not violate any international norms.", favorite: false)
 
 
 # Article.create!(title: "ESA ends efforts to recover Sentinel-1B", url: "https://spacenews.com/esa-ends-efforts-to-recover-sentinel-1b/",

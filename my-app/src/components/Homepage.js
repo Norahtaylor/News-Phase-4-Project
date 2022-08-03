@@ -1,7 +1,4 @@
 import React, {useState} from 'react';
-import ReadingList from './ReadingList';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
 
 
 function Homepage({ articleList, image, title, summary, id, fav }) {
