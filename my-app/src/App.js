@@ -71,9 +71,7 @@ function App() {
       }
     });
   }, []);
-  // if (currentUser) {
-  //   return <h2>Welcome, {currentUser.username}</h2>
-  // } 
+
 
      const updateUser = (user) => setCurrentUser(user)
 
@@ -86,12 +84,12 @@ function App() {
    
     
       <Routes>
-        <Route exact path="/" element={<Homepage articleList={articleList} />} />
+        <Route exact path="/articles" element={<Homepage articleList={articleList} />} />
         <Route exact path="/login" element={<Login updateUser={updateUser} />} />
         <Route exact path="/signup" element={<Signup updateUser={updateUser} />} /> 
         <Route exact path="/profile" element={<MyProfile updateUser={updateUser} />} />
         <Route exact path="/blogs" element={<Blogs blogList={blogList} />} />
-        <Route exact path="/ReadingList" element={<ReadingList articleList={articleList} />} />
+        <Route exact path="/ReadingList" element={<ReadingList />} />
       </Routes>
 
    </div>
