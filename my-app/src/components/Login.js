@@ -15,16 +15,17 @@ function Login({updateUser}) {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({username, password})
+            body: JSON.stringify({username: username, password: password})
         })
         .then(r => {
             if(r.ok) {
                 r.json().then(user => updateUser(user))
-                navigate('/profile')
+                // navigate('/profile')
+                console.log({username})
             } 
-            // else {
-            //     r.json().then((err) => setErrors(err.errors))
-            // }
+            else {
+                r.json().then((err) => setErrors(err.errors))
+            }
         })
         setUsername('')
         setPassword('')
@@ -33,6 +34,8 @@ function Login({updateUser}) {
 
 
   return (
+  
+        
     <div className='form'>
 
       <form onSubmit={handelSubmit}>
@@ -74,19 +77,17 @@ function Login({updateUser}) {
                   Submit
               </button>
           </div>
-          {/* <p className="forgot-password text-right">
-              Forgot <a href="#">password?</a>
-          </p> */}
-          
-            {/* {errors.length > 0 && (
-                <ul style={{ color: "red" }}>
-                      {errors.map((error) => (
-                          <li key={error}>{error}</li>
-                      ))}
-                 </ul>)}  */}
+    
 
       </form>
+          <div  >
+          {errors.map((err) => (
+              <div key={err}>{err}</div>
+          ))}
+      </div>
+
     </div>
+     
   )
 }
 

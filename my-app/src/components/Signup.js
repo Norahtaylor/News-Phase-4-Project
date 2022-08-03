@@ -13,17 +13,17 @@ function Signup({updateUser}) {
 
     function onSubmit(e) {
         e.preventDefault()
-        const user = {
-            firstName,
-            lastName,
-            username,
-            password
-        }
+     
 
         fetch('/signup', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(user)
+            body: JSON.stringify({
+                first_name: firstName,
+                last_name: lastName,
+                username: username,
+                password: password
+            })
         })
             .then(res => {
                 if (res.ok) {
@@ -32,9 +32,11 @@ function Signup({updateUser}) {
                         navigate('/profile')
                     })
                  } 
-                 //else {
-                //     res.json().then(json => setErrors(Object.entries(json.errors)))
-                // }
+                 
+                 else {
+                    res.json().then(json => setErrors(Object.entries(json.errors)))
+                    console.log(errors)
+                }
             })
             setFirstName('')
             setLastName('')
@@ -45,6 +47,11 @@ function Signup({updateUser}) {
 
     return (
         <form onSubmit={onSubmit}>
+            <div className='error'>
+                {errors.map((err) => (
+                    <div key={err}>{err}</div>
+                ))}
+            </div>
             <h3>Sign Up</h3>
             <div className="mb-3">
                 <label>First name</label>
@@ -90,6 +97,7 @@ function Signup({updateUser}) {
             <p className="forgot-password text-right">
                 Already registered <a href="/login">sign in?</a>
             </p>
+          
         </form>
   )
 }

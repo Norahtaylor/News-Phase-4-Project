@@ -10,6 +10,7 @@ import Signup from './components/Signup'
 import MyProfile from './components/MyProfile';
 import Homepage from './components/Homepage';
 import Blogs from './components/Blogs'
+import ReadingList from './components/ReadingList';
 
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
   
 
   useEffect(() => {
-    fetch('https://api.spaceflightnewsapi.net/v3/articles')
+    fetch('/articles')
     .then(res => {
       if (res.ok) {
           res.json().then(articles => setArticles(articles))
@@ -43,13 +44,13 @@ function App() {
 
     const articleList = articles.map((article) => (
       <Homepage
-     key = {article.id} 
+     id = {article.id} 
      title = {article.title} 
      link = {article.url}
-     summary = {article.summary}
-     image = {article.imageUrl}
-     newsSite = {article.newsSite}
-     date = {article.published_at} />))
+     summary = {article.description}
+     image = {article.image}
+     category = {article.category}
+     fav = {article.favorite} />))
 
   const blogList = blogs.map((blog) => (
     <Blogs
@@ -89,8 +90,8 @@ function App() {
         <Route exact path="/login" element={<Login updateUser={updateUser} />} />
         <Route exact path="/signup" element={<Signup updateUser={updateUser} />} /> 
         <Route exact path="/profile" element={<MyProfile updateUser={updateUser} />} />
-        <Route exact path="/articles" element={<ArticleList />} />
         <Route exact path="/blogs" element={<Blogs blogList={blogList} />} />
+        <Route exact path="/ReadingList" element={<ReadingList articleList={articleList} />} />
       </Routes>
 
    </div>
