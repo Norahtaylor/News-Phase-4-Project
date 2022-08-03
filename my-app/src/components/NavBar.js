@@ -37,8 +37,11 @@ function NavBar({setCurrentUser, currentUser}) {
               <Link to="/profile">My Profile</Link>
             </li>
             <li>
-              <Link to="/articles">News Articles</Link>
+              <Link to="/articles">My Reading List</Link>
            
+            </li>
+            <li>
+            <Link to="/blogs">Space Blogs</Link>
             </li>
             <li>
             {currentUser && currentUser.username ? <button href= '/' onClick={handleLogoutClick} >Logout</button> : ""}

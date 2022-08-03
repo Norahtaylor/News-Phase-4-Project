@@ -33,7 +33,7 @@ function Login({updateUser}) {
 
 
   return (
-    <div>
+    <div className='form'>
 
       <form onSubmit={handelSubmit}>
           <h3>Sign In</h3>
