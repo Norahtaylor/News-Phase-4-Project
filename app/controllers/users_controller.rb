@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  # before_action :set_user, only: %i[ show update destroy ]
+  skip_before_action :authenticate_user, only: [:create]
 
   # GET /users
   def index
@@ -18,8 +18,10 @@ class UsersController < ApplicationController
  def create 
     user = User.create!(user_params)
       if user.valid?
-    session[:user_id] = user.id
-      render json: user, status: :created
+        session[:user_id] = user.id
+        render json: user, status: :created
+      else 
+        render json: {errors: "not valid"}, status: :unauthorized
       end 
     end 
 

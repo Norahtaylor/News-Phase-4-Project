@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: %i[ show update destroy ]
-  # skip_before_action :authenticate_user
+  # before_action :set_article, only: %i[ show update destroy ]
+  skip_before_action :authenticate_user
+  # before_action :is_authorized?, only: :index
 
   # GET /articles
   def index

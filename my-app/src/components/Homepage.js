@@ -4,6 +4,8 @@ import Button from 'react-bootstrap/Button';
 
 
 function Homepage({ articleList, image, title, description, author, date }) {
+
+
   return(
     <Card className="card" style={{ width: '18rem' }}>
       {articleList}
@@ -13,7 +15,7 @@ function Homepage({ articleList, image, title, description, author, date }) {
     <Card.Body className="container">
       <Card.Title>{title}</Card.Title>
       <Card.Text>{description}</Card.Text>
-      <Button variant="primary">Add to Favorites</Button>
+      <Button variant="primary">Add to Reading List</Button>
     </Card.Body>
   </Card>
 

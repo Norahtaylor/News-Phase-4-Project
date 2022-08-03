@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::API
-    # before_action :authenticate_user
+    before_action :authenticate_user
     include ActionController::Cookies
 
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
@@ -11,10 +11,17 @@ class ApplicationController < ActionController::API
 
     private
 
-    # def authenticate_user 
-    # # when our user isnt logged in, use this method to limit their accessability 
-    #     render json: {errors: "Not Authorized"} unless current_user
-    # end 
+    def authenticate_user 
+    # when our user isnt logged in, use this method to limit their accessability 
+        render json: {errors: {User: "Not Authorized"}}, status: :unauthorized 
+        unless current_user
+    end 
+
+    # def is_authorized?
+    #     permitted = current_user.admin?
+    #     render json: { errors: {User: "login first"}}, status: :forbidden
+    #     unless permitted
+    # end
 
     def render_unprocessable_entity(invalid)
         render json: {errors: invalid.record.errors}, status: :unprocessable_entity
@@ -24,3 +31,4 @@ class ApplicationController < ActionController::API
         render json: {errors: {error.model => "Not Found"}}, status: :not_found
     end 
 end
+end 

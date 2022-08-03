@@ -13,35 +13,35 @@ import Homepage from './components/Homepage';
 
 
 function App() {
-  const [errors, setErrors] = useState()
+  const [errors, setErrors] = useState([])
   const [articles, setArticles] = useState([])
   const [currentUser, setCurrentUser] = useState({})
   
 
   useEffect(() => {
-    fetch(`http://localhost:3000/articles`)
+    fetch('/articles')
     .then(res => {
       if (res.ok) {
-          res.json().then())
+          res.json().then(articles => setArticles(articles))
       } else {
           res.json().then(data => setErrors(data.errors))
       } 
     })
   }, []) 
   
-    // const articlesList = articles.map((article) => (
-    //   <Homepage
-    //  key = {article.id} 
-    //  title = {article.title} 
-    //  author = {article.author}
-    //  description= {article.description}
-    //  image = {article.image}
-    //  date = {article.published_at} />))
+    const articleList = articles.map((article) => (
+      <Homepage
+     key = {article.id} 
+     title = {article.title} 
+     author = {article.author}
+     description= {article.description}
+     image = {article.image}
+     date = {article.published_at} />))
 
 
   useEffect(() => {
     // auto-login
-    fetch("http://localhost:4000\me").then((r) => {
+    fetch("/me").then((r) => {
       if (r.ok) {
         r.json().then((currentUser) => setCurrentUser(currentUser));
       }
@@ -52,7 +52,7 @@ function App() {
   // } 
 
      const updateUser = (user) => setCurrentUser(user)
-  // console.log(currentUser)
+
   return (
 
    <div>
@@ -62,11 +62,11 @@ function App() {
    
     
       <Routes>
-        <Route exact path="/" element={<Homepage />} />
+        <Route exact path="/" element={<Homepage articleList={articleList} />} />
         <Route exact path="/login" element={<Login updateUser={updateUser} />} />
         <Route exact path="/signup" element={<Signup updateUser={updateUser} />} /> 
         <Route exact path="/profile" element={<MyProfile updateUser={updateUser} />} />
-        <Route exact path="/articles" element={<ArticleList />} />
+        <Route exact path="/reading-list" element={<ArticleList />} />
       </Routes>
 
    </div>

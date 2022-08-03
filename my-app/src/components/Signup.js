@@ -29,11 +29,11 @@ function Signup({updateUser}) {
                 if (res.ok) {
                     res.json().then(user => {
                         updateUser(user)
-                        navigate('/profile')
+                        navigate('/')
                     })
                  } 
-                 //else {
-                //     res.json().then(json => setErrors(Object.entries(json.errors)))
+                //  else {
+                //     res.json().then((err) => setErrors(err.errors));
                 // }
             })
             setFirstName('')

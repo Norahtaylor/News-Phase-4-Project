@@ -37,7 +37,7 @@ function NavBar({setCurrentUser, currentUser}) {
               <Link to="/profile">My Profile</Link>
             </li>
             <li>
-              <Link to="/articles">News Articles</Link>
+              <Link to="/reading-list">Reading List</Link>
            
             </li>
             <li>
