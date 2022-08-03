@@ -21,9 +21,10 @@ function NavBar({setCurrentUser, currentUser}) {
   return (
   
       <div >
-        {currentUser && currentUser.username ? `Welcome ${currentUser.username}!` : ""}
+     
         <nav className="nav">
           <ul>
+            <h3>Space News</h3>
             <li>
               <Link to="/">Home</Link>
             </li>
@@ -37,12 +38,19 @@ function NavBar({setCurrentUser, currentUser}) {
               <Link to="/profile">My Profile</Link>
             </li>
             <li>
-              <Link to="/articles">News Articles</Link>
+              <Link to="/readinglist">Reading List</Link>
            
             </li>
             <li>
+            <Link to="/blogs">Space Images</Link>
+            </li>
+          <li>
+            {currentUser && currentUser.username ? `Welcome, ${currentUser.username}!` : ""}
+          </li>
+            <li>
             {currentUser && currentUser.username ? <button href= '/' onClick={handleLogoutClick} >Logout</button> : ""}
             </li>
+           
           </ul>
         </nav>
     
