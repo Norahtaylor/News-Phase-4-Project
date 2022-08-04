@@ -53,11 +53,6 @@ image: "https://spacenews.com/wp-content/uploads/2022/08/Virtual-Biden3-scaled.j
 category: "SpaceNews",
 description: "A bill that would give $52 billion in subsidies to U.S. chip makers promises to galvanize domestic production, although it will take time to alleviate a semiconductor shortage that has been delaying satellite projects.", favorite: false)
 
-Article.create!(title: "Report: U.S. should push for global rules on space traffic management",
-url: "https://spacenews.com/report-u-s-should-push-for-global-rules-on-space-traffic-management/",
-image: "https://spacenews.com/wp-content/uploads/2020/01/ebrisects_in_low-Earth_orbit_LEO_ESA-2008-e1578629438865-470x470.jpg",
-category: "SpaceNews",
-description: "It's unclear how much longer industries and governments can continue to operate safely in space without globally coordinated traffic management, says a new report from the Atlantic Council", favorite: false)
 
 Article.create!(title: "Why space debris keeps falling out of the sky—and will continue to do so",
 url: "https://arstechnica.com/science/2022/08/why-space-debris-keeps-falling-out-of-the-sky-and-will-continue-to-do-so/",

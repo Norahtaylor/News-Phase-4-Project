@@ -5,10 +5,15 @@ import CommentForm from './CommentForm';
 function Homepage({ articleList, image, title ="Blue Origin launches sixth New Shepard crewed suborbital flight", summary, id, fav, userId }) {
   const [toggle, setToggle] = useState(false)
   const [favorite, setFavorite] = useState(fav)
+  const [articles, setArticles] = useState([])
   const [change, setChange] = useState(false)
 
 
-
+  function handleDelete(){
+    fetch(`/articles/${id}`, { method: 'DELETE' })
+    // .then(() => console.log('Delete successful'));
+    window.location.reload(false)
+  }
 
     function handleOnClick(id) {
     setFavorite(!favorite)
@@ -26,7 +31,6 @@ function Homepage({ articleList, image, title ="Blue Origin launches sixth New S
       console.log("inside fetch", favorite)
 
     } 
-
 
 
 
@@ -53,8 +57,11 @@ function Homepage({ articleList, image, title ="Blue Origin launches sixth New S
         <img src={image} alt="Sample photo"/>
           <div className="text">
             <h3 className="title" >{title}</h3>
+
             <button onClick={() => handleOnClick(id)}>{!favorite ? "Added!!": "Add to Reading List" }</button>
+
           <button onClick={() => setToggle(!toggle)}>Description</button>
+          <button onClick={handleDelete}>Delete</button>
           {toggle ? <article>
             <p>{summary}</p>
           </article> : ""}
