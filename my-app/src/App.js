@@ -10,14 +10,13 @@ import Blogs from './components/Blogs'
 import ReadingList from './components/ReadingList';
 import NewArticle from './components/NewArticle';
 
-
 function App() {
   const [errors, setErrors] = useState()
   const [articles, setArticles] = useState([])
   const [blogs, setBlogs] = useState([])
   const [currentUser, setCurrentUser] = useState({})
-  const [users, setUsers] = useState([])
-  
+  const [user, setUser] = useState([])
+
 
   useEffect(() => {
     fetch('/articles')
@@ -29,6 +28,20 @@ function App() {
       } 
     })
   }, []) 
+
+
+
+
+  // useEffect(() => {
+  // fetch('/users')
+  //   .then(res => {
+  //     if (res.ok) {
+  //       res.json().then(user => setUser(user))
+  //     } else {
+  //       res.json().then(data => setErrors(data.errors))
+  //     }
+  //   }) 
+  // }, [])
 
   // console.log(articles)
   
@@ -43,7 +56,8 @@ function App() {
       }
     }) 
   }, [])
-  // console.log(users)
+
+
   
   useEffect(() => {
     fetch('https://api.spaceflightnewsapi.net/v3/blogs')
@@ -56,19 +70,28 @@ function App() {
       })
   }, []) 
 
+  // function handleDelete(id) {
+  //   const updatedArticleList = articles.filter((article) => article.id !== id)
+  //   setArticles(updatedArticleList) }
+
+
     const articleList = articles.map((article) => (
       <Homepage
+    //  handleDelete={handleDelete}
      id = {article.id} 
      title = {article.title} 
      link = {article.url}
      summary = {article.description}
      image = {article.image}
      category = {article.category}
-     fav = {article.favorite} />))
+     fav = {article.favorite}
+     articleComments={article.comments} />))
 
-     const userList = users.map((user) => (
-      <Homepage userId={user.id} />
-     ))
+    //  const userList = user.map((user) => (
+    //   <Homepage userId={user.id} />
+    //  ))
+
+    //  console.log(user)
 
   const blogList = blogs.map((blog) => (
     <Blogs
@@ -82,9 +105,6 @@ function App() {
       ))
 
 
- 
-
-
   useEffect(() => {
     // auto-login
     fetch("http://localhost:4000/me").then((r) => {
@@ -96,7 +116,7 @@ function App() {
 
 
      const updateUser = (user) => setCurrentUser(user)
-    //  console.log(currentUser)
+
 
   return (
 
@@ -105,12 +125,44 @@ function App() {
    
 
       <Routes>
+
+
         <Route exact path="/" element={<Blogs blogList={blogList} />} />
-        <Route exact path="/articles" element={<Homepage setCurrentUser={setCurrentUser} currentUser={currentUser} articleList={articleList} articles={articles} setArticles={setArticles}/>} />
-        <Route exact path="/login" element={<Login updateUser={updateUser} />} />
-        <Route exact path="/signup" element={<Signup updateUser={updateUser} />} /> 
-        <Route exact path="/new-article" element={<NewArticle updateUser={updateUser} />} />
-        <Route exact path="/ReadingList" element={<ReadingList />} />
+        
+        <Route exact path="/articles" 
+          element={<Homepage 
+            setCurrentUser={setCurrentUser} 
+            currentUser={currentUser} 
+            articleList={articleList} 
+            articles={articles} 
+            setArticles={setArticles}
+          />} 
+        />
+        <Route exact path="/login" 
+          element={<Login 
+            updateUser={updateUser} 
+          />} 
+        />
+        <Route exact path="/signup" 
+          element={<Signup 
+            updateUser={updateUser} 
+          />} 
+        /> 
+        <Route exact path="/new-article" 
+          element={<NewArticle 
+            setArticles={setArticles} 
+            articles={articles} 
+            updateUser={updateUser} 
+          />} 
+        />
+ 
+        />
+        <Route exact path="/ReadingList" 
+          element={<ReadingList 
+          />} 
+        />
+
+
       </Routes>
 
    </div>

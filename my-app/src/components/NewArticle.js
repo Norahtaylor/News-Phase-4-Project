@@ -3,10 +3,9 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import {useState} from 'react'
 import { useNavigate } from 'react-router'
-// import { useHistory } from "react-router-dom";
 
 
-function NewArticle() {
+function NewArticle({articles, setArticles}) {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [author, setAuthor] = useState('')
@@ -14,7 +13,7 @@ function NewArticle() {
   const [errors, setErrors] = useState([])
 
   const navigate = useNavigate()
-//   const history = useHistory()
+
 
   function onSubmit(e) {
     e.preventDefault()
@@ -30,11 +29,11 @@ function NewArticle() {
         })
     })
     .then((response) => response.json())
-    // history.push('/articles')
-    // navigate("/articles")
-    // window.location.reload(false)
+
+    navigate("/articles")
+
     .then((data) => {
-       console.log(data);          
+       setArticles(data);          
             //  else {
             //     res.json().then(json => setErrors(Object.entries(json.errors)))
             //     console.log(errors)
