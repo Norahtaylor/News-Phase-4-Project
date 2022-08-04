@@ -58,7 +58,7 @@ function App() {
       })
   }, []) 
 
-    const articlesList = articles.map((article) => (
+    const articleList = articles.map((article) => (
       <Homepage
      id = {article.id} 
      title = {article.title} 
