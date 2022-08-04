@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   post '/signup', to: 'users#create' 
   get '/me', to: 'users#show'
 
+get '/create' to: 'new_articles#create'
+
   get '/readinglist', to: 'articles#indexFavorite'
 
   post '/login', to: "sessions#create"
