@@ -32,9 +32,9 @@ function NavBar({setCurrentUser, currentUser}) {
             <li>
               <Link to="/new-article">New Article</Link>
             </li>
-            {/* <li>
+            <li>
               <Link to="/readinglist">Reading List</Link>
-            </li> */}
+            </li>
             <li>
               <Link to="/login">Login</Link>
             </li>

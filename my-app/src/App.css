@@ -197,11 +197,12 @@ body {
     }
   
     .text>button {
-      padding: 7px;
       font-size: 12px;
-      margin-bottom: 10px;
+      margin-bottom: 5px;
+      margin-left: 5px;
     }
-    .delete{
+
+    .delete {
       margin-left: 120px;
     }
 

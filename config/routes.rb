@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   # get '/create', to: 'articles#create'
   get '/readinglist', to: 'articles#indexFavorite'
 
+  #get article comments
+  # get '/articles/:id/comments', to: 'articles#articleComments'
+
   post '/login', to: "sessions#create"
   delete '/logout', to: 'sessions#destroy'
 

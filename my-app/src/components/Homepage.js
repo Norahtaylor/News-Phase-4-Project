@@ -4,7 +4,7 @@ import CommentForm from './CommentForm';
 import Button from 'react-bootstrap/Button';
 
 
-function Homepage({ handleDelete, currentUser, articleList, image, title, summary, id, fav, userId, articleComments }) {
+function Homepage({ handleDelete, currentUser, articleList, image, title, summary, id, fav, userId, articleComments}) {
 
   const [toggle, setToggle] = useState(false)
   const [favorite, setFavorite] = useState(fav)
@@ -12,20 +12,16 @@ function Homepage({ handleDelete, currentUser, articleList, image, title, summar
   const [change, setChange] = useState(false)
 
   console.log(currentUser)
+  console.log(articleComments)
   
   function onHandleDelete(id){
     fetch(`/articles/${id}`, { 
       method: 'DELETE' 
     })
     .then(() => setArticles())
+    window.location.reload(false)
+  }
 
-//  function handleDelete(){
-  //  fetch(`/articles/${id}`, 
-    //{ method: 'DELETE' })
-    //.then(() => console.log(articles));
-    // window.location.reload(false)
-
- // }
 
     function handleOnClick(id) {
     setFavorite(!favorite)
@@ -42,7 +38,15 @@ function Homepage({ handleDelete, currentUser, articleList, image, title, summar
       console.log({ id })
       console.log("inside fetch", favorite)
 
-    } 
+    }
+
+
+
+  // const articleComment = articleComments.map((comment) => (
+  //   <CommentForm 
+  //   id ={comment.id}
+  //   comment = {comment.comment}/>
+  // ))
 
 
   return(
@@ -53,13 +57,17 @@ function Homepage({ handleDelete, currentUser, articleList, image, title, summar
         <img src={image} alt="Sample photo"/>
           <div className="text">
             <h3 className="title" >{title}</h3>
-            <button onClick={() => handleOnClick(id)}>{!favorite ? "Added!!": "Add to Reading List" }</button>
-          <button onClick={() => setToggle(!toggle)}>Description</button>
-          <button onClick={() => onHandleDelete(id)}>Delete</button>
+            <p></p>
+            <Button variant="outline-warning" onClick={() => handleOnClick(id)}>{!favorite ? "Add to Reading List" : "Added!!"}</Button>
+            <Button className="info" onClick={() => setToggle(!toggle)} variant="outline-info">Info</Button>
+            <Button className="delete" onClick={() => onHandleDelete(id)} variant="outline-danger">Delete</Button>
+
           {toggle ? <article>
             <p>{summary}</p>
+
           </article> : ""}
-            <CommentForm currentUser={currentUser} userId={userId} articleId={id} change={change} setChange={setChange}/>
+            {/* <CommentForm articleComment={articleComment }/> */}
+            {/* <CommentForm currentUser={currentUser} id={id} userId={userId} articleId={id} change={change} setChange={setChange}/> */}
            
           </div>
       </article>
@@ -69,4 +77,4 @@ function Homepage({ handleDelete, currentUser, articleList, image, title, summar
   )
 }
 
-export default Homepage
+export default Homepage;

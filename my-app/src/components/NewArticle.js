@@ -31,6 +31,7 @@ function NewArticle({articles, setArticles}) {
     .then((response) => response.json())
 
     navigate("/articles")
+      window.location.reload(false)
 
     .then((data) => {
        setArticles(data);          

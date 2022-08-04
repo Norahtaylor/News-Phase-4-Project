@@ -16,7 +16,7 @@ function App() {
   const [blogs, setBlogs] = useState([])
   const [currentUser, setCurrentUser] = useState({})
   const [user, setUser] = useState([])
-
+  const [users, setUsers] = useState([])
 
   useEffect(() => {
     fetch('/articles')
@@ -30,20 +30,6 @@ function App() {
   }, []) 
 
 
-
-
-  // useEffect(() => {
-  // fetch('/users')
-  //   .then(res => {
-  //     if (res.ok) {
-  //       res.json().then(user => setUser(user))
-  //     } else {
-  //       res.json().then(data => setErrors(data.errors))
-  //     }
-  //   }) 
-  // }, [])
-
-  // console.log(articles)
   
 
   useEffect(() => {
@@ -87,11 +73,6 @@ function App() {
      fav = {article.favorite}
      articleComments={article.comments} />))
 
-    //  const userList = user.map((user) => (
-    //   <Homepage userId={user.id} />
-    //  ))
-
-    //  console.log(user)
 
   const blogList = blogs.map((blog) => (
     <Blogs
@@ -156,7 +137,7 @@ function App() {
           />} 
         />
  
-        />
+
         <Route exact path="/ReadingList" 
           element={<ReadingList 
           />} 

@@ -15,6 +15,11 @@ class ArticlesController < ApplicationController
     render json: article 
   end 
 
+  # def articleComments
+  #   article = Article.find(params[:id])
+  #   render json: article.comments 
+  # end 
+
   # POST /articles
   def create
     @article = Article.new(article_params)
