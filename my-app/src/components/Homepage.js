@@ -6,7 +6,7 @@ function Homepage({ articleList, image, title ="Blue Origin launches sixth New S
   const [toggle, setToggle] = useState(false)
   const [favorite, setFavorite] = useState(fav)
   const [change, setChange] = useState(false)
-  // const [favoriteToggle, setFavoriteToggle] = useState("Add to Reading List")
+
 
 
 
