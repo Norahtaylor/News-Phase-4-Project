@@ -80,8 +80,11 @@ function App() {
       summary={blog.summary}
       image={blog.imageUrl}
       newsSite={blog.newsSite}
-      date={blog.published_at} />))
+      date={blog.published_at} />
+      ))
 
+      
+    console.log(blogList)
 
   useEffect(() => {
     // auto-login

@@ -8,6 +8,7 @@ function Homepage({ articleList, image, title ="Blue Origin launches sixth New S
   const [articles, setArticles] = useState([])
   const [change, setChange] = useState(false)
 
+
   function handleDelete(){
     fetch(`/articles/${id}`, { method: 'DELETE' })
     // .then(() => console.log('Delete successful'));
