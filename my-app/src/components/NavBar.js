@@ -26,6 +26,9 @@ function NavBar({setCurrentUser, currentUser}) {
           <ul>
             <h3>Space News</h3>
             <li>
+            <Link to="/">Home</Link>
+            </li>
+            <li>
               <Link to="/articles">Space Articles</Link>
             </li>
             <li>
