@@ -1,9 +1,9 @@
 import React from "react";
 
 function CommentCard({ comment, id, change, setChange }) {
-    
+
     function handleDeleteClick() {
-        fetch(`http://localhost:9292/comments/${id}`, {
+        fetch(`/comments/${id}`, {
             method: "DELETE",
         }).then(() => setChange(!change));
     }
