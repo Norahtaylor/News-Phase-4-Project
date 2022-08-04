@@ -1,4 +1,3 @@
-
 import {useState, useEffect} from 'react';
 import { Router, Routes, Route } from 'react-router-dom'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
@@ -7,10 +6,10 @@ import NavBar from './components/NavBar'
 import Login from './components/Login'
 import ArticleList from './components/ArticleList'
 import Signup from './components/Signup'
-import MyProfile from './components/MyProfile';
 import Homepage from './components/Homepage';
 import Blogs from './components/Blogs'
 import ReadingList from './components/ReadingList';
+import NewArticle from './components/NewArticle';
 import FirstScreen from './components/FirstScreen';
 
 
@@ -88,7 +87,7 @@ function App() {
         <Route exact path="/articles" element={<Homepage articleList={articleList} />} />
         <Route exact path="/login" element={<Login updateUser={updateUser} />} />
         <Route exact path="/signup" element={<Signup updateUser={updateUser} />} /> 
-        <Route exact path="/profile" element={<MyProfile updateUser={updateUser} />} />
+        <Route exact path="/new-article" element={<NewArticle updateUser={updateUser} />} />
         <Route exact path="/blogs" element={<Blogs blogList={blogList} />} />
         <Route exact path="/ReadingList" element={<ReadingList />} />
       </Routes>

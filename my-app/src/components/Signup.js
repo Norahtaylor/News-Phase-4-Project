@@ -29,7 +29,7 @@ function Signup({updateUser}) {
                 if (res.ok) {
                     res.json().then(user => {
                         updateUser(user)
-                        navigate('/profile')
+                        navigate('/')
                     })
                  } 
                  
@@ -46,6 +46,7 @@ function Signup({updateUser}) {
     }
 
     return (
+        <div className="sign-up">
         <form onSubmit={onSubmit}>
             <div className='error'>
                 {errors.map((err) => (
@@ -99,6 +100,7 @@ function Signup({updateUser}) {
             </p>
           
         </form>
+        </div>
   )
 }
 

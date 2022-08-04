@@ -18,10 +18,35 @@ body {
   color: red
 }
 
+.article-form{
+  color: white;
+  margin-left: 20%;
+  margin-top: 90px;
+}
+
+.article-title{
+  margin-right: 50%;
+  padding-bottom: 15px;
+}
+
+.article-description{
+  margin-right: 45%;
+  padding-bottom: 25px;
+}
+
 .form {
   height: 200px;
     display: flex;
-    margin-top: 100px;
+    margin-top: 50px;
+    justify-content: center;
+    color: white
+}
+
+.sign-up{
+  color: white;
+  height: 200px;
+    display: flex;
+    margin-top: 50px;
     justify-content: center;
 }
 
@@ -42,6 +67,11 @@ body {
 
 .title {
   font-size: 2rem;
+}
+
+.welcome{
+  color: white;
+  font-size: 30px;
 }
 
 .nav ul {
@@ -135,11 +165,12 @@ body {
   /* homepage cards  */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      grid-gap: 20px;
+      grid-template-columns: repeat(4, 250px);
+      grid-gap: 40px;
       align-items: stretch;
       margin-top: 10px;
-  
+      margin-left: 5%;
+      margin-right: 5%;
     }
   
     .grid>article {

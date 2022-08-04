@@ -38,7 +38,7 @@ function NavBar({setCurrentUser, currentUser}) {
               <Link to="/signup">Signup</Link>
             </li>
             <li>
-              <Link to="/profile">My Profile</Link>
+              <Link to="/new-article">New Article</Link>
             </li>
             <li>
               <Link to="/readinglist">Reading List</Link>
@@ -47,16 +47,18 @@ function NavBar({setCurrentUser, currentUser}) {
             <li>
             <Link to="/blogs">Space Images</Link>
             </li>
-          <li>
+          {/* <li>
             {currentUser && currentUser.username ? `Welcome, ${currentUser.username}!` : ""}
-          </li>
+          </li> */}
             <li>
             {currentUser && currentUser.username ? <button href= '/' onClick={handleLogoutClick} >Logout</button> : ""}
             </li>
            
           </ul>
         </nav>
-    
+        <div className="welcome">
+        {currentUser && currentUser.username ? `Welcome, ${currentUser.username}!` : ""}
+        </div>
       </div>
 
    

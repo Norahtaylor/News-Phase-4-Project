@@ -1,6 +1,13 @@
 class ApplicationController < ActionController::API
-rescue_from ActiveRecord::RecordInvalid, with: :invalid_record 
-rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+    before_action :authenticate_user
+    include ActionController::Cookies
+
+    rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
+    rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
+
+    def current_user
+        @current_user ||= User.find_by_id(session[:user_id])
+    end 
 
 private 
 

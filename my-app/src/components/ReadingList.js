@@ -30,6 +30,8 @@ function ReadingList() {
  
   return (
     <div>
+      <h1 className="reading">My Reading List</h1>
+    <div>
       {reading.map((article) => (
       <Card
         idRead={article.id}
@@ -40,10 +42,9 @@ function ReadingList() {
         categoryRead={article.category}
         favRead={article.favorite} />
       ))}
-      <h1 className="reading">My Reading List</h1>
-     
+    </div>
     </div>
   )
 }
 
-export default ReadingList
+export default ReadingList;

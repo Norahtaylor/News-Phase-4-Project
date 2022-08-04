@@ -20,7 +20,7 @@ function Login({updateUser}) {
         .then(r => {
             if(r.ok) {
                 r.json().then(user => updateUser(user))
-                // navigate('/profile')
+                navigate('/')
                 console.log({username})
             } 
             else {
