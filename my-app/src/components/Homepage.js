@@ -2,11 +2,11 @@ import React, {useState} from 'react';
 import CommentCard from './CommentCard';
 import CommentForm from './CommentForm';
 
-function Homepage({ articleList, image, title ="Blue Origin launches sixth New Shepard crewed suborbital flight", summary, id, fav, userId }) {
+function Homepage({ articleList, image, title, summary, id, fav, userId }) {
   const [toggle, setToggle] = useState(false)
   const [favorite, setFavorite] = useState(fav)
+  const [articles, setArticles] = useState([])
   const [change, setChange] = useState(false)
-  // const [favoriteToggle, setFavoriteToggle] = useState("Add to Reading List")
 
   function handleDelete(){
     fetch(`/articles/${id}`, { method: 'DELETE' })
@@ -33,7 +33,6 @@ function Homepage({ articleList, image, title ="Blue Origin launches sixth New S
 
 
 
-
   return(
     <div>
       {/* <div class="scene">
@@ -57,11 +56,7 @@ function Homepage({ articleList, image, title ="Blue Origin launches sixth New S
         <img src={image} alt="Sample photo"/>
           <div className="text">
             <h3 className="title" >{title}</h3>
-<<<<<<< HEAD
             {/* <button onClick={() => handleOnClick(id)}>{!favorite ? "Add to Reading List" : "Added!!" }</button> */}
-=======
-            <button onClick={() => handleOnClick(id)}>{!favorite ? "Added!!": "Add to Reading List" }</button>
->>>>>>> c3f859a6d1d9aebbe3687976b3e05257f8ec2975
           <button onClick={() => setToggle(!toggle)}>Description</button>
           <button onClick={handleDelete}>Delete</button>
           {toggle ? <article>

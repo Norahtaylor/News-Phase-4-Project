@@ -18,11 +18,8 @@ function App() {
   const [articles, setArticles] = useState([])
   const [blogs, setBlogs] = useState([])
   const [currentUser, setCurrentUser] = useState({})
-<<<<<<< HEAD
-=======
   const [users, setUsers] = useState([])
   
->>>>>>> c3f859a6d1d9aebbe3687976b3e05257f8ec2975
 
   useEffect(() => {
     fetch('/articles')
@@ -60,7 +57,7 @@ function App() {
       })
   }, []) 
 
-    const articlesList = articles.map((article) => (
+    const articleList = articles.map((article) => (
       <Homepage
      id = {article.id} 
      title = {article.title} 
@@ -82,8 +79,11 @@ function App() {
       summary={blog.summary}
       image={blog.imageUrl}
       newsSite={blog.newsSite}
-      date={blog.published_at} />))
+      date={blog.published_at} />
+      ))
 
+      
+    console.log(blogList)
 
   useEffect(() => {
     // auto-login
@@ -107,11 +107,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<FirstScreen />} />
         
-<<<<<<< HEAD
-        <Route exact path="/articles" element={<Homepage articleList={articlesList} />} />
-=======
         <Route exact path="/articles" element={<Homepage setCurrentUser={setCurrentUser} currentUser={currentUser} articleList={articleList} />} />
->>>>>>> c3f859a6d1d9aebbe3687976b3e05257f8ec2975
         <Route exact path="/login" element={<Login updateUser={updateUser} />} />
         <Route exact path="/signup" element={<Signup updateUser={updateUser} />} /> 
         <Route exact path="/new-article" element={<NewArticle updateUser={updateUser} />} />
