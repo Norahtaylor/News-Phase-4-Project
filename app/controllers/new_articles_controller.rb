@@ -1,0 +1,2 @@
+class NewArticlesController < ApplicationController
+end

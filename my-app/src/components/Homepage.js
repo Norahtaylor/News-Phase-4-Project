@@ -1,15 +1,12 @@
 import React, {useState} from 'react';
-import ReadingList from './ReadingList';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import {useCart} from "react-use-cart"
 
 
-function Homepage({ articleList, image, title, summary, id, fav, article }) {
+function Homepage({ articleList, image, title, summary, id, fav }) {
   const [toggle, setToggle] = useState(false)
   const [favorite, setFavorite] = useState(fav)
   // const [favoriteToggle, setFavoriteToggle] = useState("Add to Reading List")
-  const { addItem } = useCart()
+
+
 
     function handleOnClick(id) {
     setFavorite(!favorite)
@@ -40,12 +37,12 @@ function Homepage({ articleList, image, title, summary, id, fav, article }) {
           <div className="text">
             <h3 className="title" >{title}</h3>
 
-            <button onClick={() => addItem({article})}>Add to Reading List</button>
+            <button onClick={() => handleOnClick(id)}>{!favorite ? "Added!!": "Add to Reading List" }</button>
           <button onClick={() => setToggle(!toggle)}>Description</button>
           {toggle ? <article>
             <p>{summary}</p>
           </article> : ""}
-          
+
           </div>
       </article>
     </main>
