@@ -10,6 +10,7 @@ import Homepage from './components/Homepage';
 import Blogs from './components/Blogs'
 import ReadingList from './components/ReadingList';
 import NewArticle from './components/NewArticle';
+import FirstScreen from './components/FirstScreen';
 
 
 function App() {
@@ -77,12 +78,12 @@ function App() {
   return (
 
    <div>
-
-    {/* <NavBar currentUser={currentUser} setCurrentUser={setCurrentUser}/> */}
     <NavBar setCurrentUser={setCurrentUser} currentUser={currentUser}/>
    
-    
+
       <Routes>
+        <Route exact path="/" element={<FirstScreen />} />
+        
         <Route exact path="/articles" element={<Homepage articleList={articleList} />} />
         <Route exact path="/login" element={<Login updateUser={updateUser} />} />
         <Route exact path="/signup" element={<Signup updateUser={updateUser} />} /> 

@@ -5,50 +5,75 @@ import {useState} from 'react'
 
 
 function NewArticle() {
-
-  const [formData, setFormData] = useState({
-    title:'',
-    description:''
-  })
-
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [author, setAuthor] = useState('')
+  const [image, setImage] = useState('')
   const [errors, setErrors] = useState([])
 
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData({ ...formData, [name]: value })
-  }
-
-  function onSubmit(e){
+  function onSubmit(e) {
     e.preventDefault()
-    
-    fetch('/productions',{
-      method:'POST',
-      headers: {'Content-Type': 'application/json'},
-      body:JSON.stringify({...formData, ongoing:true})
+ 
+
+    fetch('/articles', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            title: title,
+            author: author,
+            description: description,
+            image: image
+        })
     })
-    .then(res => {
-      if(res.ok){
-        res.json().then(addProduction)
-      } else {
-        //Display errors
-        res.json().then(data => setErrors(Object.entries(data.errors).map(e => `${e[0]} ${e[1]}`)))
-      }
-    })
-  }
+    .then((response) => response.json())
+    .then((data) => {
+       console.log(data);          
+            //  else {
+            //     res.json().then(json => setErrors(Object.entries(json.errors)))
+            //     console.log(errors)
+            // }
+        })
+        setTitle('')
+        setAuthor('')
+        setDescription('')
+        setImage('')
+}
 
   return (
     <div className="article-form">
-    <Form onSubmit={onSubmit}>
-      <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-        {/* <Form.Label>Title</Form.Label> */}
-        <Form.Control type="email" placeholder="Title" />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-        {/* <Form.Label>Description</Form.Label> */}
-        <Form.Control as="textarea" placeholder="Description" rows={3} />
-      </Form.Group>
-      <Button className="article-form-button" variant="secondary">Create</Button>
-    </Form>
+        <form onSubmit={onSubmit}>
+            <div className="article-title">
+                <label>Title</label>
+                <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Title"
+                    value={title}
+                    onChange={(e => setTitle(e.target.value))}
+                />
+            </div>
+            <div className="article-title">
+                <label>Author</label>
+                <input type="text" className="form-control" placeholder="Author" 
+                onChange={(e => setAuthor(e.target.value))}
+                value={author}/>
+            </div>
+            <div className="article-description">
+                <label>Description</label>
+                <input type="text" className="form-control" placeholder="Description" 
+                onChange={(e => setDescription(e.target.value))}
+                value={description}/>
+            </div>
+            <div className="article-description">
+                <label>Image Url</label>
+                <input type="text" className="form-control" placeholder="Image " 
+                onChange={(e => setImage(e.target.value))}
+                value={image}/>
+            </div>
+            <div className="article-form-button">
+            <Button type="submit" variant="secondary">Create</Button>
+            </div>      
+        </form>
     </div>
   )
 }
