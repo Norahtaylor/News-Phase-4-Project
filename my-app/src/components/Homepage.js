@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import CommentCard from './CommentCard';
 import CommentForm from './CommentForm';
 
-function Homepage({ articleList, image, title, summary, id, fav }) {
+function Homepage({ articleList, image, title ="Blue Origin launches sixth New Shepard crewed suborbital flight", summary, id, fav, userId }) {
   const [toggle, setToggle] = useState(false)
   const [favorite, setFavorite] = useState(fav)
   const [change, setChange] = useState(false)
@@ -58,7 +58,7 @@ function Homepage({ articleList, image, title, summary, id, fav }) {
           {toggle ? <article>
             <p>{summary}</p>
           </article> : ""}
-          <CommentForm articleId ={id} change={change} setChange={setChange}/>
+          <CommentForm userId={userId} articleId ={id} change={change} setChange={setChange}/>
  
 
           </div>

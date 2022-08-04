@@ -1,23 +1,52 @@
 import React, { useState } from "react";
 import CommentCard from "./CommentCard";
 
-function CommentForm({change, setChange}) {
+function CommentForm({change, setChange, articleId, userId, currentUser}) {
     const [comment, setComment] = useState("")
+    const [errors, setErrors] = useState([])
 
     function handleSubmit(e) {
         e.preventDefault();
-        fetch("/comments", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                comment: comment,
-                // user_id: id,
-            }),
-        }).then(() => setChange(!change));
-        setComment("");
+        console.log(comment)
+
+        fetch('/comments', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ comment: comment, 
+                article_id: articleId,
+                user_id: userId
+            })
+            })
+        .then(res => res.json())
+        .then(comment => console.log(comment))
     }
+
+//         fetch('/comments', {
+//             method: "POST",
+//             headers: {
+//                 "Content-Type": "application/json",
+//             },
+//             body: JSON.stringify({
+//                 comment: comment,
+                
+//                 // user_id: id,
+//             }),
+//         })
+//         .then(r => {
+//             if (r.ok) {
+//                 r.json().then(comment => setComment(comment))
+              
+//                 console.log( "comment inside request", comment )
+//             }
+//             else {
+//                 r.json().then((err) => setErrors(err.errors))
+//             }
+//         console.log("outside request", comment)
+//         setComment("");
+//     })
+// }
 
     return (
         <form onSubmit={handleSubmit}>
@@ -29,7 +58,7 @@ function CommentForm({change, setChange}) {
                 placeholder="Add a comment..."
                 className="input-text"
             />{" "}
-            <input type="submit" name="submit" value="Post" className="submit" />
+            <input type="submit" name="submit"  className="submit" />
             {comment ? <CommentCard change={change} setChange={setChange} /> : ""}
 
         </form>

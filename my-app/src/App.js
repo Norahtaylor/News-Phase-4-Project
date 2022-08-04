@@ -18,6 +18,7 @@ function App() {
   const [articles, setArticles] = useState([])
   const [blogs, setBlogs] = useState([])
   const [currentUser, setCurrentUser] = useState({})
+  const [users, setUsers] = useState([])
   
 
   useEffect(() => {
@@ -32,6 +33,18 @@ function App() {
   }, []) 
 
   console.log(articles)
+
+  useEffect(() => {
+  fetch('/users')
+    .then(res => {
+      if (res.ok) {
+        res.json().then(users => setUsers(users))
+      } else {
+        res.json().then(data => setErrors(data.errors))
+      }
+    }) 
+  }, [])
+  console.log(users)
   
   useEffect(() => {
     fetch('https://api.spaceflightnewsapi.net/v3/blogs')
@@ -53,6 +66,10 @@ function App() {
      image = {article.image}
      category = {article.category}
      fav = {article.favorite} />))
+
+     const userList = users.map((user) => (
+      <Homepage userId={user.id} />
+     ))
 
   const blogList = blogs.map((blog) => (
     <Blogs
@@ -76,6 +93,7 @@ function App() {
 
 
      const updateUser = (user) => setCurrentUser(user)
+     console.log(currentUser)
 
   return (
 
@@ -86,7 +104,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<FirstScreen />} />
         
-        <Route exact path="/articles" element={<Homepage articleList={articleList} />} />
+        <Route exact path="/articles" element={<Homepage setCurrentUser={setCurrentUser} currentUser={currentUser} articleList={articleList} />} />
         <Route exact path="/login" element={<Login updateUser={updateUser} />} />
         <Route exact path="/signup" element={<Signup updateUser={updateUser} />} /> 
         <Route exact path="/new-article" element={<NewArticle updateUser={updateUser} />} />
