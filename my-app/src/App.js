@@ -1,4 +1,3 @@
-
 import {useState, useEffect} from 'react';
 import { Router, Routes, Route } from 'react-router-dom'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
@@ -9,12 +8,14 @@ import ArticleList from './components/ArticleList'
 import Signup from './components/Signup'
 import MyProfile from './components/MyProfile';
 import Homepage from './components/Homepage';
-
+import Blogs from './components/Blogs'
+import ReadingList from './components/ReadingList';
 
 
 function App() {
-  const [errors, setErrors] = useState([])
+  const [errors, setErrors] = useState()
   const [articles, setArticles] = useState([])
+  const [blogs, setBlogs] = useState([])
   const [currentUser, setCurrentUser] = useState({})
   
 
@@ -29,19 +30,42 @@ function App() {
     })
   }, []) 
   
+  useEffect(() => {
+    fetch('https://api.spaceflightnewsapi.net/v3/blogs')
+      .then(res => {
+        if (res.ok) {
+          res.json().then(blogs => setBlogs(blogs))
+        } else {
+          res.json().then(data => setErrors(data.errors))
+        }
+      })
+  }, []) 
+
     const articleList = articles.map((article) => (
       <Homepage
-     key = {article.id} 
+     article={article}
+     id = {article.id} 
      title = {article.title} 
-     author = {article.author}
-     description= {article.description}
+     link = {article.url}
+     summary = {article.description}
      image = {article.image}
-     date = {article.published_at} />))
+     category = {article.category}
+     fav = {article.favorite} />))
+
+  const blogList = blogs.map((blog) => (
+    <Blogs
+      key={blog.id}
+      title={blog.title}
+      link={blog.url}
+      summary={blog.summary}
+      image={blog.imageUrl}
+      newsSite={blog.newsSite}
+      date={blog.published_at} />))
 
 
   useEffect(() => {
     // auto-login
-    fetch("/me").then((r) => {
+    fetch("http://localhost:4000/me").then((r) => {
       if (r.ok) {
         r.json().then((currentUser) => setCurrentUser(currentUser));
       }
@@ -66,7 +90,8 @@ function App() {
         <Route exact path="/login" element={<Login updateUser={updateUser} />} />
         <Route exact path="/signup" element={<Signup updateUser={updateUser} />} /> 
         <Route exact path="/profile" element={<MyProfile updateUser={updateUser} />} />
-        <Route exact path="/reading-list" element={<ArticleList />} />
+        <Route exact path="/blogs" element={<Blogs blogList={blogList} />} />
+        <Route exact path="/ReadingList" element={<ReadingList articleList={articleList} />} />
       </Routes>
 
    </div>
