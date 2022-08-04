@@ -2,17 +2,21 @@ import React, {useState} from 'react';
 import CommentCard from './CommentCard';
 import CommentForm from './CommentForm';
 
-function Homepage({ articleList, image, title ="Blue Origin launches sixth New Shepard crewed suborbital flight", summary, id, fav, userId }) {
+function Homepage({ handleDelete, currentUser, articleList, image, title, summary, id, fav, userId, articleComments }) {
   const [toggle, setToggle] = useState(false)
   const [favorite, setFavorite] = useState(fav)
   const [articles, setArticles] = useState([])
   const [change, setChange] = useState(false)
 
+  console.log(articleList)
+  console.log(id)
 
-  function handleDelete(){
-    fetch(`/articles/${id}`, { method: 'DELETE' })
-    // .then(() => console.log('Delete successful'));
-    window.location.reload(false)
+  console.log(currentUser)
+  function onHandleDelete(id){
+    fetch(`/articles/${id}`, { 
+      method: 'DELETE' 
+    })
+    .then(() => setArticles())
   }
 
     function handleOnClick(id) {
@@ -31,7 +35,6 @@ function Homepage({ articleList, image, title ="Blue Origin launches sixth New S
       console.log("inside fetch", favorite)
 
     } 
-
 
 
   return(
@@ -53,7 +56,7 @@ function Homepage({ articleList, image, title ="Blue Origin launches sixth New S
           </div> */}
     <main className="grid" >
       {articleList}
-      <article id= {id} >
+      <article id={id} >
         <img src={image} alt="Sample photo"/>
           <div className="text">
             <h3 className="title" >{title}</h3>
@@ -61,12 +64,12 @@ function Homepage({ articleList, image, title ="Blue Origin launches sixth New S
             <button onClick={() => handleOnClick(id)}>{!favorite ? "Added!!": "Add to Reading List" }</button>
 
           <button onClick={() => setToggle(!toggle)}>Description</button>
-          <button onClick={handleDelete}>Delete</button>
+          <button onClick={() => onHandleDelete(id)}>Delete</button>
           {toggle ? <article>
             <p>{summary}</p>
           </article> : ""}
-          <CommentForm userId={userId} articleId ={id} change={change} setChange={setChange}/>
- 
+            <CommentForm currentUser={currentUser} userId={userId} articleId={id} change={change} setChange={setChange}/>
+            
 
           </div>
       </article>

@@ -5,7 +5,7 @@ import {useState} from 'react'
 import { useNavigate } from 'react-router'
 
 
-function NewArticle() {
+function NewArticle({articles, setArticles}) {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [author, setAuthor] = useState('')
@@ -29,10 +29,9 @@ function NewArticle() {
         })
     })
     .then((response) => response.json())
-    
     navigate("/articles")
     .then((data) => {
-       console.log(data);          
+       setArticles(data);          
             //  else {
             //     res.json().then(json => setErrors(Object.entries(json.errors)))
             //     console.log(errors)
