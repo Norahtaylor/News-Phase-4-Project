@@ -21,6 +21,7 @@ function App() {
   const [users, setUsers] = useState([])
   
 
+
   useEffect(() => {
     fetch('/articles')
     .then(res => {
@@ -57,7 +58,7 @@ function App() {
       })
   }, []) 
 
-    const articleList = articles.map((article) => (
+    const articlesList = articles.map((article) => (
       <Homepage
      id = {article.id} 
      title = {article.title} 
@@ -104,7 +105,10 @@ function App() {
       <Routes>
         <Route exact path="/" element={<FirstScreen />} />
         
+
+
         <Route exact path="/articles" element={<Homepage setCurrentUser={setCurrentUser} currentUser={currentUser} articleList={articleList} />} />
+
         <Route exact path="/login" element={<Login updateUser={updateUser} />} />
         <Route exact path="/signup" element={<Signup updateUser={updateUser} />} /> 
         <Route exact path="/new-article" element={<NewArticle updateUser={updateUser} />} />
