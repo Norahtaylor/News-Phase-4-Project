@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: %i[ show update destroy ]
+  # before_action :set_comment, only: %i[ show update destroy ]
 
   # GET /comments
   def index
@@ -23,8 +23,6 @@ class CommentsController < ApplicationController
   def update
     if @comment.update(comment_params)
       render json: @comment
-    else
-      render json: @comment.errors, status: :unprocessable_entity
     end
   end
 

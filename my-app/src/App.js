@@ -30,6 +30,8 @@ function App() {
       } 
     })
   }, []) 
+
+  console.log(articles)
   
   useEffect(() => {
     fetch('https://api.spaceflightnewsapi.net/v3/blogs')
