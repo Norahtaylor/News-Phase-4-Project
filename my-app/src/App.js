@@ -4,13 +4,11 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import NavBar from './components/NavBar'
 import Login from './components/Login'
-import ArticleList from './components/ArticleList'
 import Signup from './components/Signup'
 import Homepage from './components/Homepage';
 import Blogs from './components/Blogs'
 import ReadingList from './components/ReadingList';
 import NewArticle from './components/NewArticle';
-import FirstScreen from './components/FirstScreen';
 
 function App() {
   const [errors, setErrors] = useState()
@@ -18,6 +16,7 @@ function App() {
   const [blogs, setBlogs] = useState([])
   const [currentUser, setCurrentUser] = useState({})
   const [user, setUser] = useState([])
+
 
   useEffect(() => {
     fetch('/articles')
@@ -32,6 +31,7 @@ function App() {
 
 
 
+
   // useEffect(() => {
   // fetch('/users')
   //   .then(res => {
@@ -42,6 +42,22 @@ function App() {
   //     }
   //   }) 
   // }, [])
+
+  // console.log(articles)
+  
+
+  useEffect(() => {
+  fetch('/users')
+    .then(res => {
+      if (res.ok) {
+        res.json().then(users => setUsers(users))
+      } else {
+        res.json().then(data => setErrors(data.errors))
+      }
+    }) 
+  }, [])
+
+
   
   useEffect(() => {
     fetch('https://api.spaceflightnewsapi.net/v3/blogs')
@@ -88,8 +104,6 @@ function App() {
       date={blog.published_at} />
       ))
 
-      
-
 
   useEffect(() => {
     // auto-login
@@ -103,6 +117,7 @@ function App() {
 
      const updateUser = (user) => setCurrentUser(user)
 
+
   return (
 
    <div>
@@ -110,13 +125,17 @@ function App() {
    
 
       <Routes>
-        <Route exact path="/" element={<FirstScreen />} />
+
+
+        <Route exact path="/" element={<Blogs blogList={blogList} />} />
         
         <Route exact path="/articles" 
           element={<Homepage 
             setCurrentUser={setCurrentUser} 
             currentUser={currentUser} 
             articleList={articleList} 
+            articles={articles} 
+            setArticles={setArticles}
           />} 
         />
         <Route exact path="/login" 
@@ -136,15 +155,14 @@ function App() {
             updateUser={updateUser} 
           />} 
         />
-        <Route exact path="/blogs" 
-          element={<Blogs 
-            blogList={blogList} 
-          />} 
+ 
         />
         <Route exact path="/ReadingList" 
           element={<ReadingList 
           />} 
         />
+
+
       </Routes>
 
    </div>

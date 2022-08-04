@@ -1,23 +1,31 @@
 import React, {useState} from 'react';
 import CommentCard from './CommentCard';
 import CommentForm from './CommentForm';
+import Button from 'react-bootstrap/Button';
+
 
 function Homepage({ handleDelete, currentUser, articleList, image, title, summary, id, fav, userId, articleComments }) {
+
   const [toggle, setToggle] = useState(false)
   const [favorite, setFavorite] = useState(fav)
   const [articles, setArticles] = useState([])
   const [change, setChange] = useState(false)
 
-  console.log(articleList)
-  console.log(id)
-
   console.log(currentUser)
+  
   function onHandleDelete(id){
     fetch(`/articles/${id}`, { 
       method: 'DELETE' 
     })
     .then(() => setArticles())
-  }
+
+//  function handleDelete(){
+  //  fetch(`/articles/${id}`, 
+    //{ method: 'DELETE' })
+    //.then(() => console.log(articles));
+    // window.location.reload(false)
+
+ // }
 
     function handleOnClick(id) {
     setFavorite(!favorite)
@@ -39,38 +47,20 @@ function Homepage({ handleDelete, currentUser, articleList, image, title, summar
 
   return(
     <div>
-      {/* <div class="scene">
-        <div class="blogcard">
-          <div class="card__face card__face--front">
-            <img src={image} />
-          </div>
-             <div class="card__face card__face--back">
-                  <img src="https://i.loli.net/2019/11/16/cqyJiYlRwnTeHmj.jpg" />
-            <button onClick={() => setToggle(!toggle)}>Description</button>
-            {toggle ? <article>
-              <p>{summary}</p>
-            </article> : ""}
-        
-              </div>
-          </div>
-          </div> */}
     <main className="grid" >
       {articleList}
       <article id={id} >
         <img src={image} alt="Sample photo"/>
           <div className="text">
             <h3 className="title" >{title}</h3>
-
             <button onClick={() => handleOnClick(id)}>{!favorite ? "Added!!": "Add to Reading List" }</button>
-
           <button onClick={() => setToggle(!toggle)}>Description</button>
           <button onClick={() => onHandleDelete(id)}>Delete</button>
           {toggle ? <article>
             <p>{summary}</p>
           </article> : ""}
             <CommentForm currentUser={currentUser} userId={userId} articleId={id} change={change} setChange={setChange}/>
-            
-
+           
           </div>
       </article>
     </main>

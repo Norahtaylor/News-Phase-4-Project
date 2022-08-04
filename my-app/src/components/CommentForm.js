@@ -18,6 +18,7 @@ function CommentForm({change, setChange, articleId, userId, currentUser}) {
     function handleSubmit(e) {
         e.preventDefault();
 
+
         console.log(articleId)
  
         fetch('/comments', {

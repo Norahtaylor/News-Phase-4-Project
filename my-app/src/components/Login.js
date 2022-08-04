@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 function Login({updateUser}) {
     const [username, setUsername] = useState("")
+    // const [id, setId] = useState("")
     const [password, setPassword] = useState("")
     const [errors, setErrors] = useState([])
     let navigate = useNavigate()
@@ -15,13 +16,13 @@ function Login({updateUser}) {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({username: username, password: password})
+            body: JSON.stringify({ username: username, password: password})
         })
         .then(r => {
             if(r.ok) {
                 r.json().then(user => updateUser(user))
                 navigate('/')
-                console.log({username})
+                // console.log({username})
             } 
             else {
                 r.json().then((err) => setErrors(err.errors))
