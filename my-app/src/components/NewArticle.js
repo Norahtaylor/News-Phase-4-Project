@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import {useState} from 'react'
 import { useNavigate } from 'react-router'
+// import { useHistory } from "react-router-dom";
 
 
 function NewArticle() {
@@ -13,11 +14,11 @@ function NewArticle() {
   const [errors, setErrors] = useState([])
 
   const navigate = useNavigate()
+//   const history = useHistory()
 
   function onSubmit(e) {
     e.preventDefault()
- 
-
+    
     fetch('/articles', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -29,7 +30,8 @@ function NewArticle() {
         })
     })
     .then((response) => response.json())
-    navigate("/articles")
+    // history.push('/articles')
+    // navigate("/articles")
     // window.location.reload(false)
     .then((data) => {
        console.log(data);          

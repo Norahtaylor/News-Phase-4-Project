@@ -7,14 +7,15 @@ function CommentForm({change, setChange, articleId, userId, currentUser}) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        console.log(comment)
+        // console.log(comment)
 
         fetch('/comments', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ comment: comment, 
+                body: JSON.stringify({ 
+                comment: comment, 
                 article_id: articleId,
                 user_id: userId
             })
