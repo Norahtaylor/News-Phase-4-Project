@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
   resources :new_articles
-  #namespace :api do
-
   resources :comments
   resources :articles
   resources :users
@@ -14,8 +12,6 @@ Rails.application.routes.draw do
 
   post '/login', to: "sessions#create"
   delete '/logout', to: 'sessions#destroy'
-
-   #end
 
 
 end

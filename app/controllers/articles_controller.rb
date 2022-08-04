@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: %i[ show update destroy ]
+
 
   # GET /articles
   def index
@@ -30,11 +30,9 @@ class ArticlesController < ApplicationController
 
   # PATCH/PUT /articles/1
   def update
-    if @article.update(article_params)
-      render json: @article
-    else
-      render json: @article.errors, status: :unprocessable_entity
-    end
+    article = Article.find(params[:id])
+    article.update!(article_params)
+      render json: article
   end
 
   # DELETE /articles/1

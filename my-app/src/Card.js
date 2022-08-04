@@ -35,8 +35,8 @@ function Card({ articleList, imageRead, titleRead, summaryRead, idRead, favRead,
             <div class="news-card__text-wrapper">
               <h2 class="news-card__title">{titleRead}</h2>
               <div class="news-card__post-date">
-            <button onClick={handleOnClick}> Remove from Reading List
-                </button>
+            {/* <button onClick={handleOnClick}> Remove from Reading List
+                </button> */}
                 </div>
               <div class="news-card__details-wrapper">
                 <p class="news-card__excerpt">{summaryRead}</p>
