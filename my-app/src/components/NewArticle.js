@@ -2,6 +2,7 @@ import React from 'react'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import {useState} from 'react'
+import { useNavigate } from 'react-router'
 
 
 function NewArticle() {
@@ -10,6 +11,8 @@ function NewArticle() {
   const [author, setAuthor] = useState('')
   const [image, setImage] = useState('')
   const [errors, setErrors] = useState([])
+
+  const navigate = useNavigate()
 
   function onSubmit(e) {
     e.preventDefault()
@@ -26,6 +29,8 @@ function NewArticle() {
         })
     })
     .then((response) => response.json())
+    
+    navigate("/articles")
     .then((data) => {
        console.log(data);          
             //  else {
