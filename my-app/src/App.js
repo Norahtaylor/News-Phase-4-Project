@@ -18,7 +18,6 @@ function App() {
   const [articles, setArticles] = useState([])
   const [blogs, setBlogs] = useState([])
   const [currentUser, setCurrentUser] = useState({})
-  
 
   useEffect(() => {
     fetch('/articles')
@@ -42,7 +41,7 @@ function App() {
       })
   }, []) 
 
-    const articleList = articles.map((article) => (
+    const articlesList = articles.map((article) => (
       <Homepage
      id = {article.id} 
      title = {article.title} 
@@ -84,7 +83,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<FirstScreen />} />
         
-        <Route exact path="/articles" element={<Homepage articleList={articleList} />} />
+        <Route exact path="/articles" element={<Homepage articleList={articlesList} />} />
         <Route exact path="/login" element={<Login updateUser={updateUser} />} />
         <Route exact path="/signup" element={<Signup updateUser={updateUser} />} /> 
         <Route exact path="/new-article" element={<NewArticle updateUser={updateUser} />} />

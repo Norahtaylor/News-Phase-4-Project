@@ -80,11 +80,11 @@ function Login({updateUser}) {
     
 
       </form>
-          <div  >
+          {/* <div  >
           {errors.map((err) => (
               <div key={err}>{err}</div>
           ))}
-      </div>
+      </div> */}
 
     </div>
      
