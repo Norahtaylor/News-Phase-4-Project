@@ -9,6 +9,7 @@ function Homepage({ articleList, image, title, summary, id, fav, userId }) {
   const [articles, setArticles] = useState([])
   const [change, setChange] = useState(false)
 
+
   function handleDelete(){
     fetch(`/articles/${id}`, 
     { method: 'DELETE' })

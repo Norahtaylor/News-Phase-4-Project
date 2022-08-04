@@ -81,10 +81,9 @@ function App() {
       date={blog.published_at} />
       ))
 
-      
-    // console.log(blogList)
 
-    
+ 
+
 
   useEffect(() => {
     // auto-login
