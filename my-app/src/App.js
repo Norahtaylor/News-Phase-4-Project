@@ -4,13 +4,11 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import NavBar from './components/NavBar'
 import Login from './components/Login'
-import ArticleList from './components/ArticleList'
 import Signup from './components/Signup'
 import Homepage from './components/Homepage';
 import Blogs from './components/Blogs'
 import ReadingList from './components/ReadingList';
 import NewArticle from './components/NewArticle';
-import FirstScreen from './components/FirstScreen';
 
 
 function App() {
@@ -20,7 +18,6 @@ function App() {
   const [currentUser, setCurrentUser] = useState({})
   const [users, setUsers] = useState([])
   
-
 
   useEffect(() => {
     fetch('/articles')
@@ -33,7 +30,8 @@ function App() {
     })
   }, []) 
 
-  console.log(articles)
+  // console.log(articles)
+  
 
   useEffect(() => {
   fetch('/users')
@@ -45,7 +43,7 @@ function App() {
       }
     }) 
   }, [])
-  console.log(users)
+  // console.log(users)
   
   useEffect(() => {
     fetch('https://api.spaceflightnewsapi.net/v3/blogs')
@@ -83,8 +81,9 @@ function App() {
       date={blog.published_at} />
       ))
 
-      
-    console.log(blogList)
+
+ 
+
 
   useEffect(() => {
     // auto-login
@@ -97,7 +96,7 @@ function App() {
 
 
      const updateUser = (user) => setCurrentUser(user)
-     console.log(currentUser)
+    //  console.log(currentUser)
 
   return (
 
@@ -106,16 +105,11 @@ function App() {
    
 
       <Routes>
-        <Route exact path="/" element={<FirstScreen />} />
-        
-
-
-        <Route exact path="/articles" element={<Homepage setCurrentUser={setCurrentUser} currentUser={currentUser} articleList={articleList} />} />
-
+        <Route exact path="/" element={<Blogs blogList={blogList} />} />
+        <Route exact path="/articles" element={<Homepage setCurrentUser={setCurrentUser} currentUser={currentUser} articleList={articleList} articles={articles} setArticles={setArticles}/>} />
         <Route exact path="/login" element={<Login updateUser={updateUser} />} />
         <Route exact path="/signup" element={<Signup updateUser={updateUser} />} /> 
         <Route exact path="/new-article" element={<NewArticle updateUser={updateUser} />} />
-        <Route exact path="/blogs" element={<Blogs blogList={blogList} />} />
         <Route exact path="/ReadingList" element={<ReadingList />} />
       </Routes>
 

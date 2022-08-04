@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import CommentCard from './CommentCard';
 import CommentForm from './CommentForm';
+import Button from 'react-bootstrap/Button';
 
-function Homepage({ articleList, image, title ="Blue Origin launches sixth New Shepard crewed suborbital flight", summary, id, fav, userId }) {
+function Homepage({ articleList, image, title, summary, id, fav, userId }) {
   const [toggle, setToggle] = useState(false)
   const [favorite, setFavorite] = useState(fav)
   const [articles, setArticles] = useState([])
@@ -10,9 +11,10 @@ function Homepage({ articleList, image, title ="Blue Origin launches sixth New S
 
 
   function handleDelete(){
-    fetch(`/articles/${id}`, { method: 'DELETE' })
-    // .then(() => console.log('Delete successful'));
-    window.location.reload(false)
+    fetch(`/articles/${id}`, 
+    { method: 'DELETE' })
+    .then(() => console.log(articles));
+    // window.location.reload(false)
   }
 
     function handleOnClick(id) {
@@ -36,38 +38,19 @@ function Homepage({ articleList, image, title ="Blue Origin launches sixth New S
 
   return(
     <div>
-      {/* <div class="scene">
-        <div class="blogcard">
-          <div class="card__face card__face--front">
-            <img src={image} />
-          </div>
-             <div class="card__face card__face--back">
-                  <img src="https://i.loli.net/2019/11/16/cqyJiYlRwnTeHmj.jpg" />
-            <button onClick={() => setToggle(!toggle)}>Description</button>
-            {toggle ? <article>
-              <p>{summary}</p>
-            </article> : ""}
-        
-              </div>
-          </div>
-          </div> */}
     <main className="grid" >
       {articleList}
       <article id= {id} >
         <img src={image} alt="Sample photo"/>
           <div className="text">
             <h3 className="title" >{title}</h3>
-
-            <button onClick={() => handleOnClick(id)}>{!favorite ? "Added!!": "Add to Reading List" }</button>
-
-          <button onClick={() => setToggle(!toggle)}>Description</button>
-          <button onClick={handleDelete}>Delete</button>
+            {/* <button onClick={() => handleOnClick(id)}>{!favorite ? "Add to Reading List" : "Added!!" }</button> */}
+          <Button className="info" onClick={() => setToggle(!toggle)} variant="outline-info">Info</Button>
+          <Button className="delete" onClick={handleDelete} variant="outline-danger">Delete</Button>
           {toggle ? <article>
             <p>{summary}</p>
           </article> : ""}
           <CommentForm userId={userId} articleId ={id} change={change} setChange={setChange}/>
- 
-
           </div>
       </article>
     </main>

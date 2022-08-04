@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import {useState} from 'react'
 import { useNavigate } from 'react-router'
+// import { useHistory } from "react-router-dom";
 
 
 function NewArticle() {
@@ -13,11 +14,11 @@ function NewArticle() {
   const [errors, setErrors] = useState([])
 
   const navigate = useNavigate()
+//   const history = useHistory()
 
   function onSubmit(e) {
     e.preventDefault()
- 
-
+    
     fetch('/articles', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -29,8 +30,9 @@ function NewArticle() {
         })
     })
     .then((response) => response.json())
-    
-    navigate("/articles")
+    // history.push('/articles')
+    // navigate("/articles")
+    // window.location.reload(false)
     .then((data) => {
        console.log(data);          
             //  else {
@@ -63,18 +65,23 @@ function NewArticle() {
                 onChange={(e => setAuthor(e.target.value))}
                 value={author}/>
             </div>
-            <div className="article-description">
+            {/* <div className="article-description">
                 <label>Description</label>
                 <input type="text" className="form-control" placeholder="Description" 
                 onChange={(e => setDescription(e.target.value))}
                 value={description}/>
-            </div>
+            </div> */}
             <div className="article-description">
                 <label>Image Url</label>
                 <input type="text" className="form-control" placeholder="Image " 
                 onChange={(e => setImage(e.target.value))}
                 value={image}/>
             </div>
+            <Form.Group className="article-description" controlId="exampleForm.ControlTextarea1">
+            <Form.Label>Description</Form.Label>
+            <Form.Control as="textarea" rows={3} placeholder="Description" 
+                onChange={(e => setDescription(e.target.value))} />
+            </Form.Group>
             <div className="article-form-button">
             <Button type="submit" variant="secondary">Create</Button>
             </div>      
