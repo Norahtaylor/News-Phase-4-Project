@@ -30,8 +30,6 @@ function App() {
   }, []) 
 
 
-  
-
   useEffect(() => {
   fetch('/users')
     .then(res => {
@@ -56,14 +54,32 @@ function App() {
       })
   }, []) 
 
-  // function handleDelete(id) {
-  //   const updatedArticleList = articles.filter((article) => article.id !== id)
-  //   setArticles(updatedArticleList) }
+  // const articleList = articles.map((article, index) => {
+  //   return (
+  //   <Homepage
+  //     id={index}
+  //     title={article.title}
+  //     link={article.url}
+  //     summary={article.description}
+  //     image={article.image}
+  //     category={article.category}
+  //     fav={article.favorite}
+      
+  //     comments = {article.comments.map((comment, index ) => {
+  //       return (
+  //         key={index}
+  //         comment={comment}
+
+  //       )
+  //     })}
+  //     /> 
+      
+  //     )})
 
 
     const articleList = articles.map((article) => (
       <Homepage
-    //  handleDelete={handleDelete}
+     userID = {currentUser.id}
      id = {article.id} 
      title = {article.title} 
      link = {article.url}

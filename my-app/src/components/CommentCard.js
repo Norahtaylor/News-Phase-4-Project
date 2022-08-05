@@ -1,6 +1,7 @@
 import React from "react";
+import CommentForm from "./CommentForm";
 
-function CommentCard({ commentList, comment }) {
+function CommentCard({ commentList, comment, articleComment }) {
 
     // function handleDeleteClick() {
     //     fetch(`/comments/${id}`, {
@@ -13,16 +14,17 @@ function CommentCard({ commentList, comment }) {
     //     return comment
     // }
 
-    console.log(comment)
+
 
     return (
         <div>
-            {commentList}
+           {articleComment}
             <p> 
                 
-                🗣️ {comment} 
+                🗣️ {comment}  
                 {/* <button onClick={() =>handleDeleteClick(id)}>X</button>{" "} */}
-            </p>
+         </p>
+   
         </div>
     );
 }
