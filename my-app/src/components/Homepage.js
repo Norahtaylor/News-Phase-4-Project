@@ -4,16 +4,13 @@ import CommentForm from './CommentForm';
 import Button from 'react-bootstrap/Button';
 
 
-function Homepage({ handleDelete, userID, articleList, image, title, summary, id, fav, userId, articleComments}) {
+function Homepage({ setIsLoading, isLoading, handleDelete, userID, articleList, image, title, summary, id, fav, userId, articleComments}) {
 
   const [toggle, setToggle] = useState(false)
   const [favorite, setFavorite] = useState(fav)
   const [articles, setArticles] = useState([])
   const [change, setChange] = useState(false)
-
-
-
-
+  const [comments, setComments] = useState("")
   
   function onHandleDelete(id){
     fetch(`/articles/${id}`, { 
@@ -23,10 +20,7 @@ function Homepage({ handleDelete, userID, articleList, image, title, summary, id
     window.location.reload(false)
   }
 
-
-
   function handleOnClick(id) {
-
     fetch(`/articles/${id}`, {
       method: "PATCH",
       headers: {
@@ -36,11 +30,9 @@ function Homepage({ handleDelete, userID, articleList, image, title, summary, id
     })
       .then(r => r.json())
       .then(() => setFavorite(!favorite))
-    console.log({ id })
-    console.log("inside fetch", favorite)
+
 
   }
-
 
   var articleComment = []
   if( articleComments) {
@@ -50,7 +42,6 @@ function Homepage({ handleDelete, userID, articleList, image, title, summary, id
         comment={comment.comment} />
   ))
   }
-
 
   return(
     <div>
@@ -71,9 +62,20 @@ function Homepage({ handleDelete, userID, articleList, image, title, summary, id
             <p>{summary}</p>
 
           </article> : ""}
-          <CommentForm userID={userID} articleId={id}/>
+          <CommentForm 
+            comments= {comments}
+            setComments={setComments}
+            userID={userID} 
+            id={id}
+            articleId={id}
+            setIsLoading={setIsLoading}
+            isLoading={isLoading}
+          />
             <CommentCard  
-              articleComment={articleComment} />
+              id={id}
+              articleComment={articleComment} 
+              comments={comments}
+              setComments={setComments}/>
         
 
           {/* <div>

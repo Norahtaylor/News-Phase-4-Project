@@ -1,13 +1,14 @@
 import React from "react";
 import CommentForm from "./CommentForm";
 
-function CommentCard({ commentList, comment, articleComment }) {
+function CommentCard({ commentList, id, comment, comments, setComments, articleComment }) {
 
-    // function handleDeleteClick() {
-    //     fetch(`/comments/${id}`, {
-    //         method: "DELETE",
-    //     }).then(() => setComments());
-    // }
+    function handleDeleteClick(id) {
+        fetch(`/comments/${id}`, {
+            method: "DELETE",
+        }).then(() => setComments());
+            window.location.reload(false)
+    }
 
     // function handleRender(){
     //     if(articleId === article.id)
@@ -21,8 +22,9 @@ function CommentCard({ commentList, comment, articleComment }) {
            {articleComment}
             <p> 
                 
-                🗣️ {comment}  
-                {/* <button onClick={() =>handleDeleteClick(id)}>X</button>{" "} */}
+                🗣️ "{comment}"  
+            <button className="deletebutton" 
+            onClick={() =>handleDeleteClick(id)}>X</button>{" "}
          </p>
    
         </div>

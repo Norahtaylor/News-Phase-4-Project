@@ -17,6 +17,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({})
   const [user, setUser] = useState([])
   const [users, setUsers] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     fetch('/articles')
@@ -27,8 +28,8 @@ function App() {
           res.json().then(data => setErrors(data.errors))
       } 
     })
-  }, []) 
-
+  }, [isLoading]) 
+//this is a toggle state that is trying to reset the state of 
 
   useEffect(() => {
   fetch('/users')
@@ -79,15 +80,16 @@ function App() {
 
     const articleList = articles.map((article) => (
       <Homepage
-     userID = {currentUser.id}
-     id = {article.id} 
-     title = {article.title} 
-     link = {article.url}
-     summary = {article.description}
-     image = {article.image}
-     category = {article.category}
-     fav = {article.favorite}
-     articleComments={article.comments} />))
+        userID = {currentUser.id}
+        id = {article.id} 
+        title = {article.title} 
+        link = {article.url}
+        summary = {article.description}
+        image = {article.image}
+        category = {article.category}
+        fav = {article.favorite}
+        articleComments={article.comments} 
+      />))
 
 
   const blogList = blogs.map((blog) => (
@@ -133,18 +135,23 @@ function App() {
             articleList={articleList} 
             articles={articles} 
             setArticles={setArticles}
+            setIsLoading={setIsLoading}
+            isLoading={isLoading}
           />} 
         />
+
         <Route exact path="/login" 
           element={<Login 
             updateUser={updateUser} 
           />} 
         />
+
         <Route exact path="/signup" 
           element={<Signup 
             updateUser={updateUser} 
           />} 
-        /> 
+        />
+
         <Route exact path="/new-article" 
           element={<NewArticle 
             setArticles={setArticles} 
@@ -152,13 +159,11 @@ function App() {
             updateUser={updateUser} 
           />} 
         />
- 
 
         <Route exact path="/ReadingList" 
           element={<ReadingList 
           />} 
         />
-
 
       </Routes>
 

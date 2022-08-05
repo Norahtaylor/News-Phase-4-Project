@@ -27,7 +27,9 @@ class CommentsController < ApplicationController
 
   # DELETE /comments/1
   def destroy
-    @comment.destroy
+    comment = Comment.find(params[:id])
+    comment.destroy 
+    head :no_content
   end
 
   private

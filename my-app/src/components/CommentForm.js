@@ -2,15 +2,15 @@ import React, { useEffect, useState } from "react";
 import CommentCard from "./CommentCard";
 import {useNavigate} from 'react-router'
 
-function CommentForm({ change, setChange, articleId, userID, articleComment }) {
-    const [comments, setComments] = useState("")
+function CommentForm({ setIsLoading, isLoading, change, setChange, articleId, userID, articleComment, setComments, comments}) {
     const [errors, setErrors] = useState([])
+    
     const navigate = useNavigate()
     
+    console.log(isLoading)
 
     function handleSubmit(e) {
         e.preventDefault();
- 
         fetch('/comments', {
                 method: 'POST',
                 headers: {
@@ -20,22 +20,20 @@ function CommentForm({ change, setChange, articleId, userID, articleComment }) {
                 comment: comments, 
                 article_id: articleId,
                 user_id: userID
-
             })
             })
-         .then(res => res.json())
+        .then(res => res.json())
         .then(comment => console.log(comment))
-        //navigate('/articles')
+        // navigate('/articles')
+        // setIsLoading(true)
         window.location.reload(false)
-
      }
-
 
     return (
         <div>
-
-
-         <form onSubmit={handleSubmit}>
+         <form 
+            onSubmit={handleSubmit}
+        >
              <input
                 type="text"
                 name="comment"
@@ -44,13 +42,13 @@ function CommentForm({ change, setChange, articleId, userID, articleComment }) {
                 placeholder="Add a comment..."
                 className="input-text"
             />{" "}
-            <button type="submit" name="submit"  className="submit" >Submit</button>
+            <button 
+                type="submit" 
+                name="submit" 
+                className="submit"
+            >Submit</button>
          
          </form>
-       
-            
-        
-
    </div>
     );
 }
